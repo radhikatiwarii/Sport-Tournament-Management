@@ -98,6 +98,9 @@ public class AdminDashboard {
                         vf.viewFeedback();
                         break;
                     case "7":
+                    GenerateReport g=new GenerateReport();
+                    g.generateReport();
+                    
                     case "0":
                         System.out.println("\n+--------------------------------+");
                         System.out.println("| You have been logged out.        |");

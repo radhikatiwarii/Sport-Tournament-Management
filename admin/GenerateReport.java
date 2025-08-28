@@ -1,6 +1,10 @@
 package admin;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import util.Databaseconnection;
 class GenerateReport{
-public static void generateReport() {
+public  void generateReport() {
     try {
         Connection con = Databaseconnection.getConnection();
         

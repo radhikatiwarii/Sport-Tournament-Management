@@ -68,43 +68,33 @@ public class ViewUpdateDeleteTournament {
     }
 
     void updateTournament() {
-        try (Connection con = Databaseconnection.getConnection()) {
-            System.out.println("Enter column name to update ");
-            String update_column = sc.nextLine();
-            List<String> allowedColumns = Arrays.asList("name", "start_date", "end_date", "status", "max_allowed",
-                    "organizer_id", "registration_opening_date", "registration_closing_date");
-            if (!allowedColumns.contains(update_column)) {
-                System.out.println("Invalid column name.");
-                return;
-            }
+    try (Connection con = Databaseconnection.getConnection()) {
+        String update_column = getValidColumnName();
+        if (update_column == null) return;
 
-            System.out.println("Enter new Value  ");
-            String new_value = sc.nextLine();
+        String new_value = getValidNewValue(update_column);
+        if (new_value == null) return;
 
-            System.out.println("Enter tournament id ");
-            String condition_value = sc.nextLine();
+        String condition_value = getValidTournamentId();
+        if (condition_value == null) return;
 
-            String query = "update tournaments set " + update_column + "= ? " + " where tournament_id =" + "?";
+        String query = "UPDATE tournaments SET " + update_column + " = ? WHERE tournament_id = ?";
+        PreparedStatement stmt = con.prepareStatement(query);
+        stmt.setString(1, new_value);
+        stmt.setString(2, condition_value);
 
-            PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setString(1, new_value);
-            stmt.setString(2, condition_value);
-
-            int rowsAffected = stmt.executeUpdate();
-            if (rowsAffected > 0) {
-                 System.out.println(" Tournament with ID " + condition_value + " Updated successfully.");
-            } else {
-                 System.out.println(" No tournament found with ID " + condition_value + ". Nothing was deleted.");
-            }
-
-            stmt.close();
-            con.close();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        int rowsAffected = stmt.executeUpdate();
+        if (rowsAffected > 0) {
+            System.out.println("Tournament with ID " + condition_value + " updated successfully.");
+        } else {
+            System.out.println("No tournament found with ID " + condition_value + ".");
         }
 
+        stmt.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+}
 
     void deleteTournament() {
         try (Connection con = Databaseconnection.getConnection()) {
@@ -173,4 +163,108 @@ public class ViewUpdateDeleteTournament {
             e.printStackTrace();
         }
     }
+    public String getValidColumnName() {
+    List<String> allowedColumns = Arrays.asList(
+        "name", "start_date", "end_date", "status", "max_allowed",
+        "organizer_id", "registration_opening_date", "registration_closing_date"
+    );
+
+    int attempt = 0;
+    while (attempt < 3) {
+        System.out.print("Enter column name to update: ");
+        String input = sc.nextLine().trim();
+
+        if (input.equalsIgnoreCase("Exit")) return null;
+
+        if (allowedColumns.contains(input)) {
+            return input;
+        } else {
+            System.out.println("Invalid column name! Allowed columns are:");
+            allowedColumns.forEach(col -> System.out.println("- " + col));
+            attempt++;
+        }
+    }
+    System.out.println("Too many invalid attempts. Exiting...");
+    return null;
+}
+public String getValidNewValue(String columnName) {
+    int attempt = 0;
+    while (attempt < 3) {
+        System.out.print("Enter new value for " + columnName + ": ");
+        String input = sc.nextLine().trim();
+
+        if (input.equalsIgnoreCase("Exit")) return null;
+
+        if (input.isEmpty()) {
+            System.out.println("Value cannot be empty. Please try again.");
+            attempt++;
+            continue;
+        }
+
+        switch (columnName) {
+            case "name":
+                if (input.matches("^[A-Z][a-zA-Z\\s]{2,}$")) {
+                    return input;
+                } else {
+                    System.out.println("Invalid name! Use letters and start with a capital letter.");
+                }
+                break;
+
+            case "start_date":
+            case "end_date":
+            case "registration_opening_date":
+            case "registration_closing_date":
+                if (input.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+                    return input;
+                } else {
+                    System.out.println("Invalid date format! Use YYYY-MM-DD.");
+                }
+                break;
+
+            case "status":
+                if (input.matches("(?i)Active|Inactive|Disqualified")) {
+                    return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
+                } else {
+                    System.out.println("Invalid status! Choose from Active, Inactive, or Disqualified.");
+                }
+                break;
+
+            case "max_allowed":
+            case "organizer_id":
+                if (input.matches("\\d+")) {
+                    return input;
+                } else {
+                    System.out.println("Invalid number! Please enter a positive integer.");
+                }
+                break;
+
+            default:
+                System.out.println("Unsupported column for validation.");
+                return input; // fallback if column is not recognized
+        }
+
+        attempt++;
+    }
+
+    System.out.println("Too many invalid attempts. Exiting...");
+    return null;
+}
+public String getValidTournamentId() {
+    int attempt = 0;
+    while (attempt < 3) {
+        System.out.print("Enter Tournament ID: ");
+        String input = sc.nextLine().trim();
+
+        if (input.equalsIgnoreCase("Exit")) return null;
+
+        if (input.matches("\\d+")) {
+            return input;
+        } else {
+            System.out.println("Invalid ID! Please enter a numeric value.");
+            attempt++;
+        }
+    }
+    System.out.println("Too many invalid attempts. Exiting...");
+    return null;
+}
 }

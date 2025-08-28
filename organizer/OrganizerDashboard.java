@@ -61,10 +61,14 @@ public class OrganizerDashboard {
             System.out.println("+-------------------------------------------------------+");
             System.out.println("|1. Tournamet Management                                |");
             System.out.println("|2. Venue management                                    |");
-            System.out.println("|3. Math Scheduling                                     |");
+            System.out.println("|3. View Players                                        |");
             System.out.println("|4. Team creation                                       |");
-            System.out.println("|5. Result entry and leaderboard                        |");
-            System.out.println("|6. Exit                                                |");
+            System.out.println("|5. Math Scheduling                                     |");
+            System.out.println("|6. Result entry and leaderboard                        |");
+            System.out.println("|7. Update Match Result                                 |");
+            System.out.println("|8.declareMatchWinner                                   |");
+            System.out.println("|9.manage revenue                                       |");
+            System.out.println("|10. Exit                                               |");
             System.out.println("+-------------------------------------------------------+");
 
             System.out.print("Choose an Option: ");
@@ -77,27 +81,48 @@ public class OrganizerDashboard {
                     case 1:
                         TournamentManagement tm = new TournamentManagement();
                         tm.viewTournamentDetails();
-
                         break;
+
                     case 2:
                         VenueManagement vm = new VenueManagement();
                         vm.display();
+                        break;
 
-                        break;
                     case 3:
-                        MatchSchedule ms = new MatchSchedule();
-                        ms.scheduleMatch();
+                        ViewPlayers vp = new ViewPlayers();
+                        vp.viewPlayers();
                         break;
+
                     case 4:
                         CreateTeam ct = new CreateTeam();
                         ct.getTeamName();
+                        break;
 
-                        break;
                     case 5:
-                        Leaderboard l = new Leaderboard();
-                       
+                        MatchSchedule ms = new MatchSchedule();
+                        ms.scheduleMatch();
                         break;
+
                     case 6:
+                        Leaderboard l = new Leaderboard();
+                        l.enterMatchResult(choice, choice, choice, choice, choice);
+                        break;
+                    case 7:
+                        UpdateMatchResult umr = new UpdateMatchResult();
+                        umr.updateMatchResult();
+                        break;
+
+                    case 8:
+                        DeclareMatchWinner dmr = new DeclareMatchWinner();
+                        dmr.declareMatchWinner();
+                        break;
+
+                    case 9:
+                        ManageRevenue mr = new ManageRevenue();
+                        mr.manage_revenue();
+                        break;
+
+                    case 10:
                         System.out.println(" Exiting Organizer Menu...");
                         return;
                     default:
