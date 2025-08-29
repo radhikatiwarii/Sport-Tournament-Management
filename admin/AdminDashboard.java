@@ -98,11 +98,11 @@ public class AdminDashboard {
                         vf.viewFeedback();
                         break;
                     case "7":
-                    GenerateReport g=new GenerateReport();
-                    g.generateReport();
-                    
+                        GenerateReport g = new GenerateReport();
+                        g.generateReport();
+
                     case "0":
-                        System.out.println("\n+--------------------------------+");
+                        System.out.println("\n+----------------------------------+");
                         System.out.println("| You have been logged out.        |");
                         System.out.println("+----------------------------------+\n");
                         HomePage hp = new HomePage();
@@ -116,8 +116,7 @@ public class AdminDashboard {
                         break;
                 }
             }
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -449,11 +449,11 @@ public class EventRegistration {
 
             System.out.println("List of all Registered Tournament:");
             System.out.println(
-                    "+--------------------------------------+");
+                    "+----------------------------------+");
             System.out.printf("| %-13s| %-18s| \n",
                     "Tournament_id", "Tournament Name");
             System.out.println(
-                    "+--------------------------------------+");
+                    "+----------------------------------+");
 
             while (rs.next()) {
                 int tournament_id = rs.getInt("tournament_id");
@@ -463,7 +463,7 @@ public class EventRegistration {
                         tournament_id, tournament_name);
             }
             System.out.println(
-                    "+--------------------------------------+");
+                    "+----------------------------------+");
         } catch (Exception e) {
             System.out.println("Error :" + e.getMessage());
         }

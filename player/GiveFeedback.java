@@ -8,7 +8,7 @@ import util.Databaseconnection;
 
 public class GiveFeedback {
 
-    public void submitFeedback(int user_id) {
+    public void submitFeedback(int player_id) {
         Scanner sc = new Scanner(System.in);
 
         
@@ -20,11 +20,11 @@ public class GiveFeedback {
         String message = sc.nextLine();
 
         
-        String query = "INSERT INTO feedback (user_id, match_id, message) VALUES (?, ?, ?)";
+        String query = "INSERT INTO feedback (player_id, match_id, message) VALUES (?, ?, ?)";
 
         try (Connection con = Databaseconnection.getConnection();
              PreparedStatement stmt = con.prepareStatement(query)) {
-            stmt.setInt(1, user_id);
+            stmt.setInt(1, player_id);
             stmt.setInt(2, match_id);
             stmt.setString(3, message);
             int rowsInserted = stmt.executeUpdate();

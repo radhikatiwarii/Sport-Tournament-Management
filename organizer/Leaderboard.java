@@ -26,7 +26,7 @@ public class Leaderboard {
             ps.executeUpdate();
 
             updateTeamPoints(team1Id, team2Id, winner);
-            System.out.println("✅ Match result entered successfully.");
+            System.out.println(" Match result entered successfully.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -59,7 +59,7 @@ public class Leaderboard {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT team_name, points FROM teams ORDER BY points DESC");
 
-            System.out.println("\n🏆 Leaderboard:");
+            System.out.println("\n Leaderboard:");
             while (rs.next()) {
                 System.out.println(rs.getString("team_name") + " - " + rs.getInt("points") + " pts");
             }
@@ -75,7 +75,7 @@ public class Leaderboard {
             ResultSet rs = stmt.executeQuery("SELECT team_name FROM teams ORDER BY points DESC LIMIT 1");
 
             if (rs.next()) {
-                System.out.println("\n🎉 Tournament Winner: " + rs.getString("team_name"));
+                System.out.println("\n Tournament Winner: " + rs.getString("team_name"));
             } else {
                 System.out.println("No winner yet.");
             }

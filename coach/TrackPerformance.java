@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
 import util.Databaseconnection;
+import util.InputUtil;
 
 public class TrackPerformance {
     Scanner sc = new Scanner(System.in);
@@ -28,8 +29,7 @@ public class TrackPerformance {
 
             Connection con = Databaseconnection.getConnection();
             PreparedStatement ps = con.prepareStatement(
-                "INSERT INTO player_performance (player_id, match_id, score, assists, fouls) VALUES (?, ?, ?, ?, ?)"
-            );
+                    "INSERT INTO performance (player_id, match_id, score, assists, fouls) VALUES (?, ?, ?, ?, ?)");
             ps.setInt(1, playerId);
             ps.setInt(2, matchId);
             ps.setInt(3, score);
@@ -51,8 +51,7 @@ public class TrackPerformance {
 
             Connection con = Databaseconnection.getConnection();
             PreparedStatement ps = con.prepareStatement(
-                "SELECT * FROM player_performance WHERE player_id = ?"
-            );
+                    "SELECT * FROM  performance WHERE player_id = ?");
             ps.setInt(1, playerId);
             ResultSet rs = ps.executeQuery();
 
@@ -67,6 +66,42 @@ public class TrackPerformance {
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    void performance() {
+        while (true) {
+            System.out.println("Track Performance");
+            System.out.println("____________________________________________________");
+            System.out.println("----------------------------------------------------");
+            System.out.println("----------------------------------------------------");
+            System.out.println("1. View Performance");
+            System.out.println("2. Record Performance");
+            System.out.println("3. Back");
+            System.out.println("----------------------------------------------------");
+            System.out.println("----------------------------------------------------");
+            int Choose = InputUtil.chooseInt(sc);
+            sc.nextLine();
+            switch (Choose) {
+                case 1: {
+                    viewPerformanceByPlayer();
+                    System.out.println("__________________________________________");
+                    break;
+                }
+                case 2: {
+                    recordPerformance();
+                    break;
+                }
+                case 3: {
+                    System.out.println(" Back !");
+                    System.out.println("__________________________________________");
+                    return;
+                }
+                default: {
+                    System.out.println("Invalid Choice Try Again!");
+                    break;
+                }
+            }
         }
     }
 }

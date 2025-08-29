@@ -72,12 +72,10 @@ public class CoachDashboard {
             System.out.println("|1. Coach Information                                    |");
             System.out.println("|2. Strategy Making                                      |");
             System.out.println("|3. view Assigned player to coach                        |");
-            System.out.println("|4. Attendance  Tracking                                 |");
-            System.out.println("|5. Manage team                                          |");
-            System.out.println("|6. Practice Session                                     |");
-            System.out.println("|7. Track performance                                    |");
-            System.out.println("|8. Coach Fees                                           |");
-            System.out.println("|9. Back                                                 |");
+            System.out.println("|4. Manage team                                          |");
+            System.out.println("|5. Practice Session                                     |");
+            System.out.println("|6. Track performance                                    |");
+            System.out.println("|7. Back                                                 |");
             System.out.println("+--------------------------------------------------------+");
             System.out.println("Choose an option What you Want :");
             int choice = InputUtil.chooseInt(sc);
@@ -108,41 +106,27 @@ public class CoachDashboard {
 
                     break;
                 }
+                  
                 case 4: {
-                    if (coachId != -1) {
-                        AttendanceTracking tracker = new AttendanceTracking();
-                        tracker.markAttendance(coachId);
-                    }
-                    break;
-                }
-                case 5: {
                     if (coachId != -1) {
                         TeamManagement tm = new TeamManagement();
                         tm.manageTeam(coachId);
                     }
                     break;
                 }
-                case 6: {
+                case 5: {
                     PracticeSessionManager manager = new PracticeSessionManager();
                 manager.getSessionDate();
                     manager.markAttendance();
                     break;
                 }
+                case 6: {
+                  TrackPerformance tf=new TrackPerformance();
+                  tf.performance();
+                    break;
+                }
+                
                 case 7: {
-                    System.out.println("Track performance ");
-                    System.out.println("__________________________________________");
-                    break;
-                }
-                case 8: {
-                    System.out.println("Coach Fees");
-                    System.out.println("__________________________________________");
-                    break;
-                }
-                case 9: {
-                    System.out.println(" Back !");
-                    return;
-                }
-                case 10: {
                     System.out.println(" Back !");
                     System.out.println("__________________________________________");
                     return;

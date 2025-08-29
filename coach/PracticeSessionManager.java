@@ -82,27 +82,22 @@ public class PracticeSessionManager {
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
                     }
-
                     if (input.isEmpty()) {
                         System.out.println("Session date cannot be empty, Please enter a valid date:");
                         attempt++;
 
                     }
-
                     if (input.matches("^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$")) {
                         session_date = LocalDate.parse(input);
                         getStartTime();
                         return;
-                    }
-
-                    else {
+                    } else {
                         System.out.println("Invalid date ! please follow This format (yyyy-mm-dd):");
                     }
                     attempt++;
                 } catch (Exception e) {
                     System.out.println("An error Occur :" + e.getMessage());
                 }
-
             }
             retryLogic(attempt);
         }
@@ -222,15 +217,12 @@ public class PracticeSessionManager {
             System.out.println("Description too long! Trimming to 255 characters.");
             input = input.substring(0, 255);
         }
-
         description = input;
         createPracticeSession();
         System.out.println(" Session details successfully captured!");
     }
 
-    private void retryLogic(int attempt)
-
-    {
+    private void retryLogic(int attempt) {
         System.out.println("You have tried 3 Times,");
         int reAttempt = 0;
         while (reAttempt < 3) {
@@ -264,5 +256,4 @@ public class PracticeSessionManager {
             }
         }
     }
-
 }

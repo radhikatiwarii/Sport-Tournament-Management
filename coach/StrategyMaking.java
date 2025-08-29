@@ -22,7 +22,7 @@ class StrategyMacking {
             pstmt.setString(2, Title);
             pstmt.setString(3, Description);
             int rows = pstmt.executeUpdate();
-            System.out.println(rows > 0 ? "✅ Strategy Created!" : "❌ Failed to create strategy.");
+            System.out.println(rows > 0 ? " Strategy Created!" : " Failed to create strategy.");
         } catch (SQLException e) {
             e.printStackTrace();
         }

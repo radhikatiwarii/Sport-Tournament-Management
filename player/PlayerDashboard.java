@@ -192,10 +192,10 @@ public class PlayerDashboard {
                 case 11: {
                     GiveFeedback feedbackObj = new GiveFeedback();
                     System.out.print("Enter your Player ID: ");
-                    int user_id = SessionManager.getUserId();
+                    int player_id = sc.nextInt();
                     System.out.println("___________________________________________");
 
-                    feedbackObj.submitFeedback(user_id);
+                    feedbackObj.submitFeedback(player_id);
                     break;
                 }
                 case 12: {

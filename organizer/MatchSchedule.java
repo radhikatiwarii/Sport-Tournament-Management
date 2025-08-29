@@ -23,10 +23,10 @@ public class MatchSchedule {
                 ResultSet rs = ps.executeQuery()) {
 
             System.out.println("Available Teams in Teams Table are given Below :");
-            System.out.println("+-----------------------------+");
+            System.out.println("+-------------------------+");
             System.out.printf("|%-8s| %-15s| \n",
                     "Team_ID", "Team_Name");
-            System.out.println("+-----------------------------+");
+            System.out.println("+-------------------------+");
             boolean hasResult = false;
             while (rs.next()) {
                 hasResult = true;
@@ -34,7 +34,7 @@ public class MatchSchedule {
                 String Team_Name = rs.getString("team_name");
                 System.out.printf("|%-8d| %-15s| \n",
                         Team_ID, Team_Name);
-                System.out.println("+-----------------------------+");
+                System.out.println("+-------------------------+");
             }
             if (!hasResult) {
                 System.out.println("Non Teams are available yet.");
@@ -67,7 +67,7 @@ public class MatchSchedule {
             sc.nextLine();
             getDate();
 
-            String query = "INSERT INTO matches (team1id, team2id, match_date, match_time, tournamentid) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO matches (team1id, team2id, match_date, tournamentid) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement ps = con.prepareStatement(query)) {
                 ps.setInt(1, team1Id);
                 ps.setInt(2, team2Id);
@@ -89,7 +89,7 @@ public class MatchSchedule {
 
     // 🔍 Helper: Validate team ID
     private boolean isValidTeam(Connection con, int teamId) throws SQLException {
-        String query = "SELECT id FROM teams WHERE id = ?";
+        String query = "SELECT team_id FROM teams WHERE id = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setInt(1, teamId);
             ResultSet rs = ps.executeQuery();
@@ -99,7 +99,7 @@ public class MatchSchedule {
 
     // 🔍 Helper: Validate tournament ID
     private boolean isValidTournament(Connection con, int tournamentId) throws SQLException {
-        String query = "SELECT id FROM tournaments WHERE id = ?";
+        String query = "SELECT tournament_id FROM tournaments WHERE id = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setInt(1, tournamentId);
             ResultSet rs = ps.executeQuery();
@@ -125,7 +125,7 @@ public class MatchSchedule {
 
                     }
 
-                    if (input.matches("^[A-Z][a-z]*\\s[A-Z][a-z]*$")) {
+                    if (input.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
                         date = input;
                         getTournament();
                         return;
