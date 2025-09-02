@@ -3,13 +3,13 @@ package admin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Scanner;
-
-import player.PlayerDashboard;
+ 
 import util.Databaseconnection;
 import util.InputUtil;
 import util.Password;
 import util.SafeInput;
 import util.Validation;
+import util.UniversalInput;
 
 public class AdminRegistration {
     static int user_id;
@@ -63,19 +63,16 @@ public class AdminRegistration {
     }
 
     public void getFullName() {
+        UniversalInput.pushStep(() -> getFullName());
         while (true) {
             int attempt = 0;
             while (attempt < 3) {
                 try {
-                    System.out.println("Enter your full name :");
-                    String input = SafeInput.getLine(sc).trim();
+                    String input = UniversalInput.getInputTrim(sc, "Enter your full name: ");
+                    if (input == null) return; // Back pressed
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
-                    }
-                    if (input.equalsIgnoreCase("back")) {
-                        AdminDashboard a = new AdminDashboard();
-                        a.showDashboard(sc);
                     }
                     if (input.isEmpty()) {
                         System.out.println("username cannot be empty, Please enter a valid name:");
@@ -107,19 +104,17 @@ public class AdminRegistration {
     }
 
     public void getPhoneNo() {
+        UniversalInput.pushStep(() -> getPhoneNo());
         while (true) {
             int attempt = 0;
             while (attempt < 3) {
                 try {
-                    System.out.println("Enter your Mobile no. :");
-                    String input = SafeInput.getLine(sc).trim();
+                    String input = UniversalInput.getInputTrim(sc, "Enter your Mobile no.: ");
+                    if (input == null) return; // Back pressed
                     System.out.println("_____________________________________");
 
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
-                    }
-                     if (input.equalsIgnoreCase("back")) {
-                        getFullName();
                     }
 
                     if (input.isEmpty()) {
@@ -146,18 +141,16 @@ public class AdminRegistration {
     }
 
     public void getEmail() {
+        UniversalInput.pushStep(() -> getEmail());
         while (true) {
             int attempt = 0;
             while (attempt < 3) {
                 try {
-                    System.out.println("Enter your Email_Id :");
-                    String input = SafeInput.getLine(sc).trim();
+                    String input = UniversalInput.getInputTrim(sc, "Enter your Email_Id: ");
+                    if (input == null) return; // Back pressed
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
-                    }
- if (input.equalsIgnoreCase("back")) {
-                        getPhoneNo();
                     }
                     if (input.isEmpty()) {
                         System.out.println("Email cannot be empty, Please enter a valid Email:");
@@ -201,6 +194,13 @@ public class AdminRegistration {
         Password passwordUtil = new Password();
         password = passwordUtil.getPassword();
         
+        if (password == null) {
+            return;
+        }
+        if ("BACK_COMMAND".equals(password)) {
+            getEmail();
+            return;
+        }
         if (password != null) {
             System.out.println("Encrypted Password: " + password);
         }
@@ -214,13 +214,16 @@ public class AdminRegistration {
 
                 try {
                     System.out.println("Please specify your role (player, coach, admin, organizer):");
-                    String inputRole = SafeInput.getLine(sc).trim().toLowerCase();
+                    String inputRole = SafeInput.getLine(sc);
+                    if (inputRole == null) return;
+                    inputRole = inputRole.trim().toLowerCase();
                     System.out.println("_____________________________________");
                     if (inputRole.equalsIgnoreCase("Exit")) {
                         return;
                     }
-                     if (inputRole.equalsIgnoreCase("back")) {
+                    if (inputRole.equalsIgnoreCase("back")) {
                         getPassword();
+                        return;
                     }
                     if (inputRole.isEmpty()) {
                         System.out.println("Role cannot be empty, Please enter your password:");

@@ -35,11 +35,13 @@ public class AdminDashboard {
                         System.out.println("Login");
                         AdminLogin al = new AdminLogin();
                         al.Login();
-                        showImplementationDashboard(sc);
+                        // Only show implementation dashboard if login was successful
+                        // Login method should handle its own flow
                         break;
                     }
                     case 3: {
                         System.out.println("Back");
+                        System.out.println("_______________________________________________________________________");
                         return;
                     }
                     default: {
@@ -76,7 +78,12 @@ public class AdminDashboard {
                 System.err.println("|0. Logout                                                 |");
                 System.out.println("+-----------------------------------=----------------------+");
 
-                String option = InputHelper.getString("Enter your option: ", attempt);
+                String option = GlobalInputHandler.getInputWithTrim(sc, "Enter your option: ");
+                if (option == null) {
+                    HomePage hp = new HomePage();
+                    hp.homepage();
+                    return;
+                }
 
                 switch (option) {
                     case "1":

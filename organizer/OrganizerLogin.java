@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import util.Databaseconnection;
 import util.SafeInput;
+import util.UniversalInput;
 
 public class OrganizerLogin {
   Scanner sc = new Scanner(System.in);
@@ -36,21 +37,28 @@ public class OrganizerLogin {
   }
 
   void Login() {
+    UniversalInput.pushStep(() -> Login());
     int attempt = 3;
     while (attempt > 0) {
-      System.out.println("Enter your email id :");
-      String email = SafeInput.getLine(sc).trim();;
+      String email = UniversalInput.getInputTrim(sc, "Enter your email id: ");
+      if (email == null) return; // Back pressed
       System.out.println("___________________________________________________________");
 
-      System.out.println("Password");
-      String password = SafeInput.getLine(sc).trim();;
+      String password = UniversalInput.getInputTrim(sc, "Password: ");
+      if (password == null) {
+        // Back pressed on password - go back to email input
+        continue; // This will restart the loop and ask for email again
+      }
       System.out.println("___________________________________________________________");
 
       if (verifyUser(email, password)) {
         System.out.println();
         System.out.println("Login Succesfull Welcome , " + email);
         System.out.println("___________________________________________________________");
-
+        
+        // Show implementation dashboard after successful login
+        OrganizerDashboard od = new OrganizerDashboard();
+        od.showImplementationDashboard(sc);
         return;
       } else {
         attempt--;

@@ -34,12 +34,14 @@ public class PlayerDashboard {
                         System.out.println("Login");
                         PlayerLogin pl = new PlayerLogin();
                         pl.Login();
-                        showImplementationDashboard(sc);
+                        // Only show implementation dashboard if login was successful
+                        // Login method should handle its own flow
                         break;
                     }
                     case 3: {
                         System.out.println("Back");
-                        return;
+                        System.out.println("_______________________________________________________________________");
+                        return; // This will go back to HomePage
                     }
                     default: {
 

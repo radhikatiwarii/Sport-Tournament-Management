@@ -32,11 +32,13 @@ public class OrganizerDashboard {
                         System.out.println("Login");
                         OrganizerLogin ol = new OrganizerLogin();
                         ol.Login();
-                        showImplementationDashboard(sc);
+                        // Only show implementation dashboard if login was successful
+                        // Login method should handle its own flow
                         break;
                     }
                     case 3: {
                         System.out.println("Back");
+                        System.out.println("_______________________________________________________________________");
                         return;
                     }
                     default: {

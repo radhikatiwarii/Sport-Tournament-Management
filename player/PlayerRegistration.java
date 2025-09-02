@@ -8,6 +8,7 @@ import util.InputUtil;
 import util.Validation;
 import util.Password;
 import util.SafeInput;
+import util.UniversalInput;
 
 public class PlayerRegistration {
     static int user_id;
@@ -61,12 +62,13 @@ public class PlayerRegistration {
     }
 
     public void getFullName() {
+        UniversalInput.pushStep(() -> getFullName());
         while (true) {
             int attempt = 0;
             while (attempt < 3) {
                 try {
-                    System.out.println("Enter your full name :");
-                    String input = SafeInput.getLine(sc).trim();
+                    String input = UniversalInput.getInputTrim(sc, "Enter your full name: ");
+                    if (input == null) return; // Back pressed
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
@@ -103,12 +105,13 @@ public class PlayerRegistration {
     }
 
     public void getPhoneNo() {
+        UniversalInput.pushStep(() -> getPhoneNo());
         while (true) {
             int attempt = 0;
             while (attempt < 3) {
                 try {
-                    System.out.println("Enter your Mobile no. :");
-                    String input = SafeInput.getLine(sc).trim();
+                    String input = UniversalInput.getInputTrim(sc, "Enter your Mobile no.: ");
+                    if (input == null) return; // Back pressed
                     System.out.println("_____________________________________");
 
                     if (input.equalsIgnoreCase("Exit")) {
@@ -139,12 +142,13 @@ public class PlayerRegistration {
     }
 
     public void getEmail() {
+        UniversalInput.pushStep(() -> getEmail());
         while (true) {
             int attempt = 0;
             while (attempt < 3) {
                 try {
-                    System.out.println("Enter your Email_Id :");
-                    String input = SafeInput.getLine(sc).trim();
+                    String input = UniversalInput.getInputTrim(sc, "Enter your Email_Id: ");
+                    if (input == null) return; // Back pressed
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
@@ -189,10 +193,16 @@ public class PlayerRegistration {
     }
 
     public void getPassword() {
+        UniversalInput.pushStep(() -> getPassword());
         Password passwordUtil = new Password();
         password = passwordUtil.getPassword();
-        if (password.equalsIgnoreCase("back")) {
+        
+        if (password == null) {
+            return;
+        }
+        if ("BACK_COMMAND".equals(password)) {
             getEmail();
+            return;
         }
         if (password != null) {
             System.out.println("Encrypted Password: " + password);
@@ -206,8 +216,8 @@ public class PlayerRegistration {
             while (attempt < 3) {
 
                 try {
-                    System.out.println("Please specify your role (player, coach, admin, organizer):");
-                    String inputRole = SafeInput.getLine(sc).trim();
+                    String inputRole = UniversalInput.getInputTrim(sc, "Please specify your role (player, coach, admin, organizer): ");
+                    if (inputRole == null) return; // Back pressed
                     System.out.println("_____________________________________");
                     if (inputRole.equalsIgnoreCase("Exit")) {
                         return;

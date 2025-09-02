@@ -44,7 +44,7 @@ public class CoachDashboard {
                     }
                     case 3: {
                         System.out.println("Back");
-                        System.out.println("______________________________________________________________");
+                        System.out.println("_______________________________________________________________________");
                         return;
                     }
                     default: {

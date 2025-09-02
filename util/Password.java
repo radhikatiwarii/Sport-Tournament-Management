@@ -36,14 +36,13 @@ public class Password {
     }
 
     public String getPassword() {
+        UniversalInput.pushStep(() -> getPassword());
         while (true) {
             int attempt = 0;
             while (attempt < 3) {
                 try {
-                    System.out.println("Enter your password :");
-                    String input = SafeInput.getLine(sc);
-                    if (input == null) return null; // Handle back command
-                    input = input.trim();
+                    String input = UniversalInput.getInputTrim(sc, "Enter your password: ");
+                    if (input == null) return "BACK_COMMAND"; // Back was pressed
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return null;

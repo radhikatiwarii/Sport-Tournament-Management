@@ -8,17 +8,15 @@ public class SafeInput {
     
     private static final int INVALID_INPUT = -1;
     
-    
+    // Use UniversalInput for all string inputs
     public static String getLine(Scanner sc) {
-        try {
-            return sc.nextLine();
-        } catch (NoSuchElementException e) {
-            handleInputTermination();
-            return null;
-        }
+        return UniversalInput.getInput(sc, "");
     }
     
-   
+    public static String getLineWithPrompt(Scanner sc, String prompt) {
+        return UniversalInput.getInput(sc, prompt);
+    }
+    
     public static int getInt(Scanner sc) {
         try {
             return sc.nextInt();
@@ -31,7 +29,6 @@ public class SafeInput {
             return INVALID_INPUT;
         }
     }
-    
     
     private static void handleInputTermination() {
         System.err.println("Input terminated (Ctrl+Z detected). Exiting...");
