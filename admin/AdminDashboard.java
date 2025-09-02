@@ -11,11 +11,11 @@ public class AdminDashboard {
         int attempt = 3;
         while (attempt > 0) {
             System.out.println("--------------------------------------------");
-            System.out.println("--------------------------------------------");
-            System.out.println(" Choose an option :");
-            System.out.println(" 1. Register");
-            System.out.println(" 2. Login");
-            System.out.println(" 3. Back");
+            System.err.println("--------------------------------------------");
+            System.err.println(" Choose an option :");
+            System.err.println(" 1. Register");
+            System.err.println(" 2. Login");
+            System.err.println(" 3. Back");
             System.out.println("--------------------------------------------");
             System.out.println("--------------------------------------------");
             int choice = InputUtil.chooseInt(sc);
@@ -24,7 +24,7 @@ public class AdminDashboard {
             try {
                 switch (choice) {
                     case 1: {
-                        System.out.println("Register Here!");
+                        System.err.println("Register Here!");
                         AdminRegistration ar = new AdminRegistration();
                         ar.getFullName();
                         return;
@@ -60,17 +60,17 @@ public class AdminDashboard {
         try {
             while (true) {
 
-                System.out.println("\n+---------------------------------------------------------+");
+                System.out.println("\n+----------------------------------------------------------+");
                 System.out.println("|                 Admin Menu !                             |");
                 System.out.println("+----------------------------------------------------------+");
-                System.out.println("|1. view Users                                             |");
-                System.out.println("|2. View Coach Assigned to Player                          |");
+                System.err.println("|1. view Users                                             |");
+                System.err.println("|2. View Coach Assigned to Player                          |");
                 System.out.println("|3. Create Tournament                                      |");
                 System.out.println("|4. Assign Organizer to Tournament                         |");
                 System.out.println("|5. Delete/Update Tournament                               |");
-                System.out.println("|6.View Feedback                                           |");
+                System.err.println("|6. View Feedback                                          |");
                 System.out.println("|7. Generate Report                                        |");
-                System.out.println("|0. Logout                                                 |");
+                System.err.println("|0. Logout                                                 |");
                 System.out.println("+-----------------------------------=----------------------+");
 
                 String option = InputHelper.getString("Enter your option: ", attempt);
@@ -98,21 +98,21 @@ public class AdminDashboard {
                         vf.viewFeedback();
                         break;
                     case "7":
-                        GenerateReport g = new GenerateReport();
-                        g.generateReport();
+                       GenerateReport g = new GenerateReport();
+                        g.generateSummaryReport();
 
                     case "0":
-                        System.out.println("\n+----------------------------------+");
-                        System.out.println("| You have been logged out.        |");
-                        System.out.println("+----------------------------------+\n");
+                        System.err.println("\n+----------------------------------+");
+                        System.err.println("| You have been logged out.        |");
+                        System.err.println("+----------------------------------+\n");
                         HomePage hp = new HomePage();
                         hp.homepage();
                         return;
 
                     default:
-                        System.out.println("\n+--------------------------------+");
-                        System.out.println("| Invalid Option. Try Again.    |");
-                        System.out.println("+--------------------------------+\n");
+                        System.err.println("\n+--------------------------------+");
+                        System.err.println("| Invalid Option. Try Again.    |");
+                        System.err.println("+--------------------------------+\n");
                         break;
                 }
             }

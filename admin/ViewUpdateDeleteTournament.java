@@ -98,7 +98,7 @@ public class ViewUpdateDeleteTournament {
 
     void deleteTournament() {
         try (Connection con = Databaseconnection.getConnection()) {
-            System.out.println("enter the id of the column you want to delete !");
+            System.out.println("enter the id of the tournament you want to delete !");
             int tournament_id = sc.nextInt();
             sc.nextLine();
 
@@ -129,12 +129,12 @@ public class ViewUpdateDeleteTournament {
 
             System.out.println("Data of The Tournament Table ");
             System.out.println(
-                    "+-------------------------------------------------------------------------------------------------------------------------------------------------------+");
+                    "+----------------------------------------------------------------------------------------------------------------------------------------------------+");
             System.out.printf("|%-15s| %-15s| %-10s| %-10s| %-8s| %-12s| %-12s| %-25s| %-25s| \n",
                     "Tournament_id", "Name", "Start_date", "end_date", "status", "Max_allowed", "Organizer_id",
                     "Registration_Openingdate", "Registration_Closingdate");
             System.out.println(
-                    "+-------------------------------------------------------------------------------------------------------------------------------------------------------+");
+                    "+----------------------------------------------------------------------------------------------------------------------------------------------------+");
             boolean hasResult = false;
 
             while (rs.next()) {
@@ -152,7 +152,7 @@ public class ViewUpdateDeleteTournament {
                         Tournament_id, Name, Start_date, End_date, Status, Max_allowed, Organizer_id,
                         Registration_Openingdate, Registration_Closingdate);
                 System.out.println(
-                        "+-------------------------------------------------------------------------------------------------------------------------------------------------------+");
+                        "+----------------------------------------------------------------------------------------------------------------------------------------------------+");
             }
             if (!hasResult) {
                 System.out.println("Non tournament available yet.");

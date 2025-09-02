@@ -1,4 +1,4 @@
-package player;
+package organizer;
 
 import java.sql.Connection;
 import java.sql.Statement;

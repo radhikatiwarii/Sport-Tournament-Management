@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Match",
+            "request": "launch",
+            "mainClass": "organizer.Match",
+            "projectName": "SportTournament_a09e8aa5"
+        },
+        {
+            "type": "java",
+            "name": "GenerateReport",
+            "request": "launch",
+            "mainClass": "admin.GenerateReport",
+            "projectName": "SportTournament_a09e8aa5"
+        },
+        {
+            "type": "java",
+            "name": "Leaderboard",
+            "request": "launch",
+            "mainClass": "organizer.Leaderboard",
+            "projectName": "SportTournament_a09e8aa5"
+        },
+        {
+            "type": "java",
+            "name": "Match",
+            "request": "launch",
+            "mainClass": "player.Match",
+            "projectName": "SportTournament_a09e8aa5"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "main.Main",

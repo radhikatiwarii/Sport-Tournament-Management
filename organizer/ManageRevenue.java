@@ -31,6 +31,10 @@ public class ManageRevenue {
                     return;
                 }
 
+                System.out.format("+------------+--------------+--------+---------+--------------+--------+%n");
+                System.out.format("| Revenue ID | Source       | Amount | Revenue | Organizer    | Refund |%n");
+                System.out.format("+------------+--------------+--------+---------+--------------+--------+%n");
+
                 while (rs.next()) {
                     String revenueid = rs.getString("revenue_id");
                     String source = rs.getString("source");
@@ -39,18 +43,11 @@ public class ManageRevenue {
                     String organizer = rs.getString("organizer_fee");
                     String refund = rs.getString("refund_amount");
 
-                    // System.out.println(
-                    // revenueid + ", " + source + ", " + amount + ", " + revenue + ", " + organizer
-                    // + ", "
-                    // + refund);
-                    System.out.format("+------------+--------------+--------+---------+--------------+--------+%n");
-                    System.out.format("| Revenue ID | Source       | Amount | Revenue | Organizer    | Refund |%n");
-                    System.out.format("+------------+--------------+--------+---------+--------------+--------+%n");
                     System.out.format("| %-10s | %-12s | %-6s | %-7s | %-12s | %-6s |%n",
                             revenueid, source, amount, revenue, organizer, refund);
-                    System.out.format("+------------+--------------+--------+---------+--------------+--------+%n");
-
                 }
+                
+                System.out.format("+------------+--------------+--------+---------+--------------+--------+%n");
 
                 System.out.println("=======================================");
             }

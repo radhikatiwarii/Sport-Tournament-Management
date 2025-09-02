@@ -1,6 +1,7 @@
 {
   "java.project.referencedLibraries": [
-    "lib/*.jar",
-    "lib/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar"
+    "lib/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar",
+    "lib/itextpdf-5.5.13.4/itextpdf-5.5.13.4.jar",
+    "lib/itextpdf-5.5.13.4.jar"
   ]
 }

@@ -54,7 +54,7 @@ public class AdminLogin {
       } else {
         attempt--;
         if (attempt > 0) {
-          System.out.println("Login Failed ! Invalid information or you are not admin ,you have " + attempt + " attempts left ,Try Again");
+          System.err.println("Login Failed ! Invalid information or you are not admin ,you have " + attempt + " attempts left ,Try Again");
           System.out.println("_______________________________________________________________________________________");
         } else {
           System.out.println("Too many Invalid Attempts. Please Try Again Later.");

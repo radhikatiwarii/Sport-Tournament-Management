@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         HomePage main = new HomePage();
         main.homepage();
+        
 
         try (Connection con = Databaseconnection.getConnection()) {
             System.out.println("Database connected successfully !");

@@ -45,7 +45,6 @@ public class MatchSchedule {
         }
     }
 
-    // Method 2: Schedule match with validation
     public void scheduleMatch() {
         showAvailableTeams();
 
@@ -87,7 +86,6 @@ public class MatchSchedule {
         }
     }
 
-    // 🔍 Helper: Validate team ID
     private boolean isValidTeam(Connection con, int teamId) throws SQLException {
         String query = "SELECT team_id FROM teams WHERE id = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
@@ -97,7 +95,6 @@ public class MatchSchedule {
         }
     }
 
-    // 🔍 Helper: Validate tournament ID
     private boolean isValidTournament(Connection con, int tournamentId) throws SQLException {
         String query = "SELECT tournament_id FROM tournaments WHERE id = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {

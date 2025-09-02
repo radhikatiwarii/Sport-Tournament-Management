@@ -40,7 +40,7 @@ public class PlayerRegistration {
                     }
                     case 2: {
                         System.out.println("Exiting....");
-                        break;
+                        return;
                     }
                     default: {
                         System.out.println("Invalid Choice , Try again:");
@@ -71,6 +71,10 @@ public class PlayerRegistration {
                         return;
                     }
 
+                    if (input.equalsIgnoreCase("back")) {
+                        PlayerDashboard p = new PlayerDashboard();
+                        p.showDashboard(sc);
+                    }
                     if (input.isEmpty()) {
                         System.out.println("username cannot be empty, Please enter a valid name:");
                         attempt++;
@@ -112,6 +116,9 @@ public class PlayerRegistration {
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
                     }
+                    if (input.equalsIgnoreCase("back")) {
+                        getFullName();
+                    }
 
                     if (input.isEmpty()) {
                         System.out.println("Mobile No. cannot be empty, Please enter a valid number:");
@@ -147,7 +154,9 @@ public class PlayerRegistration {
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
                     }
-
+                    if (input.equalsIgnoreCase("back")) {
+                        getPhoneNo();
+                    }
                     if (input.isEmpty()) {
                         System.out.println("Email cannot be empty, Please enter a valid Email:");
                         attempt++;
@@ -189,6 +198,9 @@ public class PlayerRegistration {
     public void getPassword() {
         Password passwordUtil = new Password();
         password = passwordUtil.getPassword();
+        if (password.equalsIgnoreCase("back")) {
+            getEmail();
+        }
         if (password != null) {
             System.out.println("Encrypted Password: " + password);
         }
@@ -206,6 +218,9 @@ public class PlayerRegistration {
                     System.out.println("_____________________________________");
                     if (inputRole.equalsIgnoreCase("Exit")) {
                         return;
+                    }
+                    if (inputRole.equalsIgnoreCase("back")) {
+                        getPassword();
                     }
                     if (inputRole.isEmpty()) {
                         System.out.println("Role cannot be empty, Please enter your password:");

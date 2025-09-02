@@ -64,10 +64,10 @@ public class OrganizerDashboard {
             System.out.println("|3. View Players                                        |");
             System.out.println("|4. Team creation                                       |");
             System.out.println("|5. Math Scheduling                                     |");
-            System.out.println("|6. Result entry and leaderboard                        |");
-            System.out.println("|7. Update Match Result                                 |");
-            System.out.println("|8.declareMatchWinner                                   |");
-            System.out.println("|9.manage revenue                                       |");
+            System.out.println("|6. Play Match                                          |");
+            System.out.println("|7. declareMatchWinner                                  |");
+            System.out.println("|8. View Match Results                                  |");
+            System.out.println("|9. manage revenue                                      |");
             System.out.println("|10. Exit                                               |");
             System.out.println("+-------------------------------------------------------+");
 
@@ -102,21 +102,19 @@ public class OrganizerDashboard {
                         MatchSchedule ms = new MatchSchedule();
                         ms.scheduleMatch();
                         break;
-
-                    case 6:
-                        Leaderboard l = new Leaderboard();
-                        l.enterMatchResult(choice, choice, choice, choice, choice);
+                    case 6: {
+                        Match m = new Match();
+                        m.teamId();
                         break;
+                    }
                     case 7:
-                        UpdateMatchResult umr = new UpdateMatchResult();
-                        umr.updateMatchResult();
-                        break;
-
-                    case 8:
                         DeclareMatchWinner dmr = new DeclareMatchWinner();
                         dmr.declareMatchWinner();
                         break;
-
+                    case 8:
+                        ViewMatchResult vmr = new ViewMatchResult();
+                        vmr.viewResults();
+                        break;
                     case 9:
                         ManageRevenue mr = new ManageRevenue();
                         mr.manage_revenue();
@@ -125,6 +123,7 @@ public class OrganizerDashboard {
                     case 10:
                         System.out.println(" Exiting Organizer Menu...");
                         return;
+
                     default:
                         System.out.println("Invalid option. Please try again.");
                 }

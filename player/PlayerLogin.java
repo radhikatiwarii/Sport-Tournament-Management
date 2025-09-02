@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import util.Databaseconnection;
 import util.SessionManager;
@@ -23,10 +25,10 @@ public class PlayerLogin {
 
       ResultSet rs = ps.executeQuery();
       if (rs.next()) {
-        user_id = rs.getInt("User_Id");
+        user_id = rs.getInt("user_id");
       }
 
-    } catch (Exception e) {
+    } catch (SQLException e) {
       System.out.println(e.getMessage());
     }
     return user_id;
