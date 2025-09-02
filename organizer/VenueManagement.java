@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import util.Databaseconnection;
 import util.InputUtil;
+import util.SafeInput;
 
 public class VenueManagement {
     static String available_dates;
@@ -64,7 +65,7 @@ public class VenueManagement {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your Venue name :");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
@@ -95,7 +96,7 @@ public class VenueManagement {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your  venue location :");
-                    String input = sc.nextLine().trim();
+                    String input =SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
@@ -126,7 +127,7 @@ public class VenueManagement {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your  venue Capacity :");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
@@ -224,7 +225,7 @@ public class VenueManagement {
                 System.out.println("[1]. Try Again");
                 System.out.println("[2]. exit");
                 System.out.println("choose an option :");
-                int choice = sc.nextInt();
+                int choice =InputUtil.chooseInt(sc);
                 sc.nextLine();
                 switch (choice) {
                     case 1: {

@@ -8,6 +8,7 @@ import java.util.Scanner;
 import util.Databaseconnection;
 import util.InputUtil;
 import util.Password;
+import util.SafeInput;
 import util.Validation;
 
 public class CoachRegistration {
@@ -64,12 +65,15 @@ public class CoachRegistration {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your full name :");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
                     }
-
+                    if (input.equalsIgnoreCase("back")) {
+                        CoachDashboard c = new CoachDashboard();
+                        c.showDashboard(sc);
+                    }
                     if (input.isEmpty()) {
                         System.out.println("username cannot be empty, Please enter a valid name:");
                         attempt++;
@@ -101,11 +105,14 @@ public class CoachRegistration {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your Mobile no. :");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
 
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
+                    }
+                    if (input.equalsIgnoreCase("back")) {
+                        getFullName();
                     }
 
                     if (input.isEmpty()) {
@@ -137,10 +144,13 @@ public class CoachRegistration {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your Email_Id :");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
+                    }
+                    if (input.equalsIgnoreCase("back")) {
+                        getPhoneNo();
                     }
 
                     if (input.isEmpty()) {
@@ -197,10 +207,13 @@ public class CoachRegistration {
 
                 try {
                     System.out.println("Please specify your role (player, coach, admin, organizer):");
-                    String inputRole = sc.nextLine().trim().toLowerCase();
+                    String inputRole = SafeInput.getLine(sc).trim().toLowerCase();
                     System.out.println("_____________________________________");
                     if (inputRole.equalsIgnoreCase("Exit")) {
                         return;
+                    }
+                    if (inputRole.equalsIgnoreCase("back")) {
+                        getPassword();
                     }
                     if (inputRole.isEmpty()) {
                         System.out.println("Role cannot be empty, Please enter your Role:");

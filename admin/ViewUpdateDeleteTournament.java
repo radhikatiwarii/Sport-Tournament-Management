@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import util.Databaseconnection;
 import util.InputUtil;
+import util.SafeInput;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -99,7 +100,7 @@ public class ViewUpdateDeleteTournament {
     void deleteTournament() {
         try (Connection con = Databaseconnection.getConnection()) {
             System.out.println("enter the id of the tournament you want to delete !");
-            int tournament_id = sc.nextInt();
+            int tournament_id = InputUtil.chooseInt(sc);
             sc.nextLine();
 
             String query = "delete from tournaments where tournament_id =?";
@@ -172,8 +173,7 @@ public class ViewUpdateDeleteTournament {
     int attempt = 0;
     while (attempt < 3) {
         System.out.print("Enter column name to update: ");
-        String input = sc.nextLine().trim();
-
+        String input = SafeInput.getLine(sc).trim();
         if (input.equalsIgnoreCase("Exit")) return null;
 
         if (allowedColumns.contains(input)) {
@@ -191,7 +191,7 @@ public String getValidNewValue(String columnName) {
     int attempt = 0;
     while (attempt < 3) {
         System.out.print("Enter new value for " + columnName + ": ");
-        String input = sc.nextLine().trim();
+        String input = SafeInput.getLine(sc).trim();
 
         if (input.equalsIgnoreCase("Exit")) return null;
 
@@ -253,7 +253,7 @@ public String getValidTournamentId() {
     int attempt = 0;
     while (attempt < 3) {
         System.out.print("Enter Tournament ID: ");
-        String input = sc.nextLine().trim();
+        String input = SafeInput.getLine(sc).trim();
 
         if (input.equalsIgnoreCase("Exit")) return null;
 

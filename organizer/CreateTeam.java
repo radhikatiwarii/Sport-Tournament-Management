@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
 import util.Databaseconnection;
+import util.SafeInput;
 
 public class CreateTeam {
     Scanner sc = new Scanner(System.in);
@@ -52,7 +53,7 @@ public class CreateTeam {
             while (attempt < 3) {
                 try {
                     System.out.print("Enter Team Name: ");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
 
                     if (input.equalsIgnoreCase("Exit")) {
@@ -118,7 +119,7 @@ public class CreateTeam {
                 showAvailableCoachIds();
                 System.out.println("_______________________________________________");
                 System.out.print("Enter Coach ID: ");
-                String input = sc.nextLine().trim();
+                String input = SafeInput.getLine(sc).trim();
                 System.out.println("_____________________________________");
 
                 if (input.equalsIgnoreCase("Exit"))
@@ -181,7 +182,7 @@ public class CreateTeam {
                 System.out.println("_______________________________________________");
 
                 System.out.print("Enter Tournament ID: ");
-                String input = sc.nextLine().trim();
+                String input =SafeInput.getLine(sc).trim();
 
                 System.out.println("_____________________________________");
 
@@ -207,7 +208,7 @@ public class CreateTeam {
         int attempt = 0;
         while (attempt < 3) {
             System.out.print("Enter Team Status (Active/Inactive/Disqualified): ");
-            String input = sc.nextLine().trim();
+            String input = SafeInput.getLine(sc).trim();
             System.out.println("_____________________________________");
 
             if (input.equalsIgnoreCase("Exit"))
@@ -228,7 +229,7 @@ public class CreateTeam {
         int attempt = 0;
         while (attempt < 3) {
             System.out.print("Enter full path to team logo image: ");
-            String input = sc.nextLine().trim();
+            String input = SafeInput.getLine(sc).trim();
             System.out.println("_____________________________________");
 
             if (input.equalsIgnoreCase("Exit")) {
@@ -251,7 +252,7 @@ public class CreateTeam {
         while (attempt < 3) {
             try {
                 System.out.print("Enter total championships won: ");
-                String input = sc.nextLine().trim();
+                String input = SafeInput.getLine(sc).trim();
                 System.out.println("_____________________________________");
 
                 if (input.equalsIgnoreCase("Exit"))

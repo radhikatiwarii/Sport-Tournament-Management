@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
 import util.Databaseconnection;
+import util.InputUtil;
 
 public class CoachAssignToPlayer {
 
@@ -48,7 +49,7 @@ public class CoachAssignToPlayer {
             }
 
             System.out.print("  Enter Coach ID you want to assign: ");
-            int coachId = sc.nextInt();
+            int coachId = InputUtil.chooseInt(sc);
 
             PreparedStatement ps = con.prepareStatement("SELECT fees FROM coaches WHERE coach_id = ?");
             ps.setInt(1, coachId);

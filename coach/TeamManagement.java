@@ -105,7 +105,7 @@ public class TeamManagement {
 
     private void assignCaptain(int teamId) {
         System.out.print("Enter Player ID to assign as Captain: ");
-        int Player_id = sc.nextInt();
+        int Player_id = InputUtil.chooseInt(sc);
         try {
             PreparedStatement ps = con
                     .prepareStatement("UPDATE players SET player_role = 'Captain' WHERE Player_id = ?");
@@ -119,7 +119,7 @@ public class TeamManagement {
 
     private void removePlayer(int teamId) {
         System.out.print("Enter Player ID to remove: ");
-        int player_id = sc.nextInt();
+        int player_id = InputUtil.chooseInt(sc);
         try {
             PreparedStatement ps = con.prepareStatement("UPDATE players SET team_id = NULL WHERE Player_id = ?");
             ps.setInt(1, player_id);

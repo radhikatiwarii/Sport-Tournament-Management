@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import util.Databaseconnection;
+import util.SafeInput;
 
 public class ViewUsers {
     public static void viewUsers()
@@ -59,8 +60,7 @@ public class ViewUsers {
 
         while (attempt < 3) {
             System.out.print("Enter role to view (Admin, Coach, Organizer, Player): ");
-            String input = sc.nextLine().trim();
-
+            String input =  SafeInput.getLine(sc).trim();
             if (input.equalsIgnoreCase("Exit")) return null;
 
             for (String role : allowedRoles) {

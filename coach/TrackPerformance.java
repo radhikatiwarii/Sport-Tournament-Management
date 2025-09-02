@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 import util.Databaseconnection;
 import util.InputUtil;
+import util.SafeInput;
 
 public class TrackPerformance {
     Scanner sc = new Scanner(System.in);
@@ -13,19 +14,19 @@ public class TrackPerformance {
     public void recordPerformance() {
         try {
             System.out.print("Enter player ID: ");
-            int playerId = Integer.parseInt(sc.nextLine().trim());
+            int playerId = Integer.parseInt(SafeInput.getLine(sc).trim());
 
             System.out.print("Enter match ID: ");
-            int matchId = Integer.parseInt(sc.nextLine().trim());
+            int matchId = Integer.parseInt(SafeInput.getLine(sc).trim());
 
             System.out.print("Enter goals scored: ");
-            int score = Integer.parseInt(sc.nextLine().trim());
+            int score = Integer.parseInt(SafeInput.getLine(sc).trim());
 
             System.out.print("Enter assists made: ");
-            int assists = Integer.parseInt(sc.nextLine().trim());
+            int assists = Integer.parseInt(SafeInput.getLine(sc).trim());
 
             System.out.print("Enter fitness rating (1-10): ");
-            int fitness = Integer.parseInt(sc.nextLine().trim());
+            int fitness = Integer.parseInt(SafeInput.getLine(sc).trim());
 
             Connection con = Databaseconnection.getConnection();
             PreparedStatement ps = con.prepareStatement(
@@ -47,7 +48,7 @@ public class TrackPerformance {
     public void viewPerformanceByPlayer() {
         try {
             System.out.print("Enter player ID to view performance: ");
-            int playerId = Integer.parseInt(sc.nextLine().trim());
+            int playerId = Integer.parseInt(SafeInput.getLine(sc).trim());
 
             Connection con = Databaseconnection.getConnection();
             PreparedStatement ps = con.prepareStatement(

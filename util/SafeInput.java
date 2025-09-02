@@ -8,11 +8,7 @@ public class SafeInput {
     
     private static final int INVALID_INPUT = -1;
     
-    /**
-     * Safely reads a line of input from the scanner
-     * @param sc Scanner object
-     * @return Input line or null if terminated
-     */
+    
     public static String getLine(Scanner sc) {
         try {
             return sc.nextLine();
@@ -22,11 +18,7 @@ public class SafeInput {
         }
     }
     
-    /**
-     * Safely reads an integer from the scanner
-     * @param sc Scanner object
-     * @return Integer value or INVALID_INPUT (-1) if invalid
-     */
+   
     public static int getInt(Scanner sc) {
         try {
             return sc.nextInt();
@@ -40,9 +32,7 @@ public class SafeInput {
         }
     }
     
-    /**
-     * Handles input termination (Ctrl+Z)
-     */
+    
     private static void handleInputTermination() {
         System.err.println("Input terminated (Ctrl+Z detected). Exiting...");
         System.exit(0);

@@ -3,6 +3,8 @@ package admin;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Scanner;
+import util.NavigationHelper;
+import util.NavigationHelper;
 
 public class InputHelper {
      static Scanner scanner = new Scanner(System.in);
@@ -12,30 +14,33 @@ public class InputHelper {
         while (attempt[0] < 3) {
             System.out.print(prompt);
             try {
-                
-
                 if (scanner.hasNextLine()) {
-                    return scanner.nextLine().trim();
+                    String input = scanner.nextLine();
+                    if (input == null) return null;
+                    input = input.trim();
+                    // Check for back command
+                    if (NavigationHelper.checkBackCommand(input)) {
+                        NavigationHelper.goBack();
+                        return null;
+                    }
+                    return input;
                 } else {
                     System.out.println("\nInput was interrupted.. Please provide valid input.");
                     System.out.println("------------------------------------------------------------\n");
-
                     attempt[0]++;
                     scanner = new Scanner(System.in);
                 }
             } catch (Exception e) {
                 System.out.println("An unexpected error occurred. Please try again.");
                 System.out.println("------------------------------------------------------------\n");
-
+                attempt[0]++;
             }
         }
-        if (attempt[0]==3) {
-            System.out.println("losse your three attempts");
-            System.out.println("returning to login page");
-            
-        } 
-        
-        return null; 
+        if (attempt[0] >= 3) {
+            System.out.println("Lost your three attempts");
+            System.out.println("Returning to login page");
+        }
+        return null;
     }
 
     public static String getInput() {

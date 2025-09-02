@@ -7,8 +7,12 @@ import java.util.Scanner;
 public class Password {
 
     private static final String ALGORITHM = "AES";
-    private static final String SECRET_KEY = "1234567890123456"; // 16-char secret key (change as needed)
+    private static final String SECRET_KEY = generateSecretKey(); // Dynamic secret key
     private Scanner sc = new Scanner(System.in);
+    
+    private static String generateSecretKey() {
+        return "SportTournament16"; // 16 chars for AES
+    }
 
     
 
@@ -37,11 +41,14 @@ public class Password {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your password :");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc);
+                    if (input == null) return null; // Handle back command
+                    input = input.trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return null;
                     }
+                     
                     if (input.isEmpty()) {
                         System.out.println("Password cannot be empty, Please enter a valid password:");
                         attempt++;
@@ -76,44 +83,39 @@ public class Password {
             retryLogic(attempt);
         }
     }
-private void retryLogic(int attempt)
-
-    {
+    private void retryLogic(int attempt) {
         System.out.println("You have tried 3 Times,");
         int reAttempt = 0;
         while (reAttempt < 3) {
             try {
                 System.out.println("-----------------------------");
                 System.out.println("[1]. Try Again");
-                System.out.println("[2]. exit");
+                System.out.println("[2]. Exit");
                 System.out.println("-----------------------------");
-
-                System.out.println("choose an option :");
+                System.out.println("Choose an option:");
+                
                 int choice = InputUtil.chooseInt(sc);
                 sc.nextLine();
+                
                 switch (choice) {
-                    case 1: {
-                        return;
-                    }
-                    case 2: {
+                    case 1:
+                        return; // Go back to password input
+                    case 2:
                         System.out.println("Exiting....");
-                        break;
-                    }
-                    default: {
-                        System.out.println("Invalid Choice , Try again:");
+                        System.exit(0); // Proper exit
+                        return;
+                    default:
+                        System.out.println("Invalid Choice, Try again:");
                         reAttempt++;
                         break;
-                    }
-                }
-                if (reAttempt == 3) {
-                    System.out.println("Invalid attemts ! Exitting...");
-                    return;
                 }
             } catch (Exception e) {
-                System.out.println("Exception Occurs : " + e.getMessage());
+                System.out.println("Exception Occurs: " + e.getMessage());
                 reAttempt++;
             }
         }
+        System.out.println("Invalid attempts! Exiting...");
+        System.exit(0);
     }
 
     

@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
 import util.Databaseconnection;
+import util.InputUtil;
 
 class Match extends Thread {
     Scanner sc = new Scanner(System.in);
@@ -100,7 +101,7 @@ class Match extends Thread {
 
     void teamId() {
         System.out.print("Enter Match ID: ");
-        int matchId = sc.nextInt();
+        int matchId = InputUtil.chooseInt(sc);
         boolean matchExists = false;
         try (Connection con = Databaseconnection.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT team1_id, team2_id FROM matches WHERE match_id = ?");

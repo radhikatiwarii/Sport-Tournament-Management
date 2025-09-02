@@ -2,6 +2,7 @@ package organizer;
 
 import util.Databaseconnection;
 import util.InputUtil;
+import util.SafeInput;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,10 +51,10 @@ public class MatchSchedule {
 
         try (Connection con = Databaseconnection.getConnection()) {
             System.out.print("Enter Team 1 ID: ");
-            int team1Id = sc.nextInt();
+            int team1Id = InputUtil.chooseInt(sc);
 
             System.out.print("Enter Team 2 ID: ");
-            int team2Id = sc.nextInt();
+            int team2Id = InputUtil.chooseInt(sc);
 
             if (team1Id == team2Id) {
                 System.out.println(" Team 1 and Team 2 cannot be the same.");
@@ -110,7 +111,7 @@ public class MatchSchedule {
             while (attempt < 3) {
                 try {
                     System.out.print("Enter Match Date (YYYY-MM-DD): ");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
@@ -142,7 +143,7 @@ public class MatchSchedule {
 
     void getTournament() {
         System.out.print("Enter Tournament ID: ");
-        int tournamentId = sc.nextInt();
+        int tournamentId = InputUtil.chooseInt(sc);
         try (Connection con = Databaseconnection.getConnection()) {
 
             if (!isValidTournament(con, tournamentId)) {

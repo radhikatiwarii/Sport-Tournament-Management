@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 import util.Databaseconnection;
+import util.InputUtil;
+import util.SafeInput;
 
 public class GiveFeedback {
 
@@ -13,11 +15,11 @@ public class GiveFeedback {
 
         
         System.out.print("Enter Match ID: ");
-        int match_id = sc.nextInt();
+        int match_id =InputUtil.chooseInt(sc);
         sc.nextLine(); 
        
         System.out.print("Enter your feedback (max 255 characters): ");
-        String message = sc.nextLine();
+        String message = SafeInput.getLine(sc).trim();
 
         
         String query = "INSERT INTO feedback (player_id, match_id, message) VALUES (?, ?, ?)";

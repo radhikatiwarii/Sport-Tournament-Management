@@ -3,10 +3,12 @@ package admin;
 import java.util.Scanner;
 import main.HomePage;
 import util.InputUtil;
+import util.NavigationHelper;
 
 public class AdminDashboard {
 
     public void showDashboard(Scanner sc) {
+        NavigationHelper.pushPage(() -> showDashboard(sc));
         System.out.println("Welcome to Admin Dashboard!");
         int attempt = 3;
         while (attempt > 0) {
@@ -56,6 +58,7 @@ public class AdminDashboard {
     }
 
     public void showImplementationDashboard(Scanner sc) {
+        NavigationHelper.pushPage(() -> showImplementationDashboard(sc));
         int attempt[] = { 0 };
         try {
             while (true) {
@@ -99,7 +102,7 @@ public class AdminDashboard {
                         break;
                     case "7":
                        GenerateReport g = new GenerateReport();
-                        g.generateSummaryReport();
+                        //g.generateSummaryReport();
 
                     case "0":
                         System.err.println("\n+----------------------------------+");

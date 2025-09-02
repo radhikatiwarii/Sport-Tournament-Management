@@ -3,17 +3,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Scanner;
 import util.Databaseconnection;
+import util.InputUtil;
+import util.SafeInput;
 
 public class UpdateMatchResult {
     Scanner sc=new Scanner(System.in);
         public void updateMatchResult() {
         try {
             System.out.print("Enter the Match ID to update: ");
-            int matchId = sc.nextInt();
+            int matchId = InputUtil.chooseInt(sc);
             sc.nextLine();
 
             System.out.print("Enter the Winner Team ID: ");
-            int winnerTeamId = sc.nextInt();
+            int winnerTeamId =InputUtil.chooseInt(sc);
             sc.nextLine();
             if (!isValidTeam(winnerTeamId)) {
                 System.out.println(" Invalid Team ID. Please try again.");
@@ -21,7 +23,7 @@ public class UpdateMatchResult {
             }
 
             System.out.print("Enter the Score (e.g., 2-1): ");
-            String score = sc.nextLine().trim();
+            String score =SafeInput.getLine(sc).trim();
 
             if (!score.matches("^\\d+-\\d+$")) {
                 System.out.println(" Invalid score format. Use the format: X-Y (e.g., 2-1).");

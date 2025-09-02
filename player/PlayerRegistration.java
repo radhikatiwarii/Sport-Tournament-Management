@@ -7,6 +7,7 @@ import util.Databaseconnection;
 import util.InputUtil;
 import util.Validation;
 import util.Password;
+import util.SafeInput;
 
 public class PlayerRegistration {
     static int user_id;
@@ -65,16 +66,13 @@ public class PlayerRegistration {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your full name :");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
                     }
 
-                    if (input.equalsIgnoreCase("back")) {
-                        PlayerDashboard p = new PlayerDashboard();
-                        p.showDashboard(sc);
-                    }
+                    
                     if (input.isEmpty()) {
                         System.out.println("username cannot be empty, Please enter a valid name:");
                         attempt++;
@@ -110,16 +108,13 @@ public class PlayerRegistration {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your Mobile no. :");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
 
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
                     }
-                    if (input.equalsIgnoreCase("back")) {
-                        getFullName();
-                    }
-
+                  
                     if (input.isEmpty()) {
                         System.out.println("Mobile No. cannot be empty, Please enter a valid number:");
                         attempt++;
@@ -149,14 +144,12 @@ public class PlayerRegistration {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your Email_Id :");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
                     }
-                    if (input.equalsIgnoreCase("back")) {
-                        getPhoneNo();
-                    }
+                   
                     if (input.isEmpty()) {
                         System.out.println("Email cannot be empty, Please enter a valid Email:");
                         attempt++;
@@ -214,14 +207,12 @@ public class PlayerRegistration {
 
                 try {
                     System.out.println("Please specify your role (player, coach, admin, organizer):");
-                    String inputRole = sc.nextLine().trim().toLowerCase();
+                    String inputRole = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (inputRole.equalsIgnoreCase("Exit")) {
                         return;
                     }
-                    if (inputRole.equalsIgnoreCase("back")) {
-                        getPassword();
-                    }
+                   
                     if (inputRole.isEmpty()) {
                         System.out.println("Role cannot be empty, Please enter your password:");
                         attempt++;

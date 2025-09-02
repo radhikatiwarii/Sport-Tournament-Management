@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 
 import util.Databaseconnection;
+import util.SafeInput;
 
 public class CoachLogin {
   Scanner sc = new Scanner(System.in);
@@ -42,10 +43,10 @@ public class CoachLogin {
     int attempt = 3;
     while (attempt > 0) {
       System.out.println("Enter your email id :");
-      String email = sc.nextLine();
+      String email = SafeInput.getLine(sc).trim();
 
       System.out.println("Password");
-      String password = sc.nextLine();
+      String password = SafeInput.getLine(sc).trim();
 
       int coach_id=verifyUser(email, password) ;
         if (coach_id != -1) {

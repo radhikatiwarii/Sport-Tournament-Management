@@ -9,6 +9,7 @@ import java.util.Scanner;
 import util.Databaseconnection;
 
 import util.InputUtil;
+import util.SafeInput;
 
 public class PracticeSessionManager {
     static int team_id;
@@ -77,7 +78,7 @@ public class PracticeSessionManager {
             while (attempt < 3) {
                 try {
                     System.out.print("Enter session date (yyyy-mm-dd): ");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
@@ -109,7 +110,7 @@ public class PracticeSessionManager {
             while (attempt < 3) {
                 try {
                     System.out.print("Enter start time (HH:mm): ");
-                    String input = sc.nextLine().trim();
+                    String input =  SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit"))
                         return;
@@ -142,7 +143,7 @@ public class PracticeSessionManager {
             while (attempt < 3) {
                 try {
                     System.out.print("Enter end time (HH:mm): ");
-                    String input = sc.nextLine().trim();
+                    String input =  SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit"))
                         return;
@@ -181,7 +182,7 @@ public class PracticeSessionManager {
             while (attempt < 3) {
                 try {
                     System.out.print("Enter session location: ");
-                    String input = sc.nextLine().trim();
+                    String input =  SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit"))
                         return;
@@ -210,7 +211,7 @@ public class PracticeSessionManager {
 
     public void getDescription() {
         System.out.print("Enter session description (optional, max 255 chars): ");
-        String input = sc.nextLine().trim();
+        String input = SafeInput.getLine(sc).trim();
         System.out.println("_____________________________________");
 
         if (!input.isEmpty() && input.length() > 255) {

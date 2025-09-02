@@ -43,7 +43,7 @@ public class AdminRegistration {
                     }
                     case 2: {
                         System.out.println("Exiting....");
-                        break;
+                        return;
                     }
                     default: {
                         System.out.println("Invalid Choice , Try again:");

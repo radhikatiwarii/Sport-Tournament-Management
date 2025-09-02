@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
+import java.sql.SQLException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import util.Databaseconnection;
+import util.SafeInput;
 import util.SessionManager;
 
 public class PlayerLogin {
@@ -39,11 +41,12 @@ public class PlayerLogin {
     int attempt = 3;
     while (attempt > 0) {
       System.out.println("Enter your email id :");
-      String email = sc.nextLine();
+      String email = SafeInput.getLine(sc).trim();
+
       System.out.println("___________________________________________________________");
 
       System.out.println("Password");
-      String password = sc.nextLine();
+      String password = SafeInput.getLine(sc).trim();
       System.out.println("___________________________________________________________");
 
       int user_id = verifyUser(email, password);

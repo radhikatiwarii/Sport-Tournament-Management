@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import util.Databaseconnection;
 import util.InputUtil;
+import util.SafeInput;
 import util.SessionManager;
 import util.Validation;
 
@@ -214,7 +215,7 @@ public class EventRegistration {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your address :");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
 
                     if (input.equalsIgnoreCase("Exit")) {
@@ -250,7 +251,7 @@ public class EventRegistration {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your age :");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_______________________________________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
@@ -283,7 +284,7 @@ public class EventRegistration {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your specialization :");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
@@ -316,7 +317,7 @@ public class EventRegistration {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your status :");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
@@ -349,7 +350,7 @@ public class EventRegistration {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter no. of matches you played :");
-                    String input = sc.nextLine();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
 
                     if (input.equalsIgnoreCase("Exit")) {
@@ -385,7 +386,7 @@ public class EventRegistration {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your scored goal :");
-                    String input = sc.nextLine();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
 
                     if (input.equalsIgnoreCase("Exit")) {
@@ -414,7 +415,7 @@ public class EventRegistration {
             while (attempt < 3) {
                 try {
                     System.out.println("Enter your role :");
-                    String input = sc.nextLine().trim();
+                    String input =SafeInput.getLine(sc).trim();
                     System.out.println("_______________________________________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;

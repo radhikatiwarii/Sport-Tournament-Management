@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.util.Scanner;
 import util.Databaseconnection;
 import util.InputUtil;
+import util.SafeInput;
 
 public class CoachRegistration2 {
     static int user_id;
@@ -68,7 +69,7 @@ public class CoachRegistration2 {
             while (attempt < 3) {
                 try {
                     System.out.println("please Enter your fees.");
-                    String input = sc.nextLine();
+                    String input =  SafeInput.getLine(sc).trim();
 
                     System.out.println("_____________________________________");
                     if (input.equals("Exit")) {
@@ -106,7 +107,7 @@ public class CoachRegistration2 {
             while (attempt < 3) {
                 try {
                     System.out.println("Please enter the field in which you can teach well. ");
-                    String input = sc.nextLine();
+                    String input = SafeInput.getLine(sc).trim();
 
                     System.out.println("_____________________________________");
                     if (input.equals("Exit")) {
@@ -144,7 +145,7 @@ public class CoachRegistration2 {
             while (attempt < 3) {
                 try {
                     System.out.println("Please tell us about you Something .");
-                    String input = sc.nextLine();
+                    String input =  SafeInput.getLine(sc).trim();
 
                     System.out.println("_____________________________________");
                     if (input.equals("Exit")) {
@@ -182,7 +183,7 @@ public class CoachRegistration2 {
             while (attempt < 3) {
                 try {
                     System.out.println("enter yor experience of coaching .");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
 
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {

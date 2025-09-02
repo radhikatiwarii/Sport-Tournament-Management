@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 import java.sql.Timestamp;
+import util.SafeInput;
 import util.InputUtil;
 
 class StrategyMacking {
@@ -34,7 +35,7 @@ class StrategyMacking {
             while (attempt < 3) {
                 try {
                     System.out.print("Enter Strategy Title: ");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
@@ -71,7 +72,7 @@ class StrategyMacking {
             while (attempt < 3) {
                 try {
                     System.out.print("Enter Strategy Description: ");
-                    String input = sc.nextLine().trim();
+                    String input = SafeInput.getLine(sc).trim();
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
