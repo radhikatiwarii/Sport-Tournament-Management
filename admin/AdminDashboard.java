@@ -4,6 +4,7 @@ import java.util.Scanner;
 import main.HomePage;
 import util.InputUtil;
 import util.NavigationHelper;
+import util.GlobalInputHandler;
 
 public class AdminDashboard {
 
@@ -109,7 +110,8 @@ public class AdminDashboard {
                         break;
                     case "7":
                        GenerateReport g = new GenerateReport();
-                        //g.generateSummaryReport();
+                        g.getTournamentId();
+                        break;
 
                     case "0":
                         System.err.println("\n+----------------------------------+");

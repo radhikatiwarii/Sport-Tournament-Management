@@ -8,6 +8,7 @@ import java.util.Scanner;
 import util.Databaseconnection;
 import util.SafeInput;
 import util.UniversalInput;
+import util.SessionManager;
 
 public class OrganizerLogin {
   Scanner sc = new Scanner(System.in);
@@ -15,25 +16,29 @@ public class OrganizerLogin {
   private boolean verifyUser(String email, String password) {
     boolean isVerified = false;
     try (Connection con = Databaseconnection.getConnection()) {
-      String query = "select *from users where email=? and password=? and role='organizer'";
+      String query = "select u.user_id from users u where u.email=? and u.password=? and u.role='organizer'";
 
       PreparedStatement ps = con.prepareStatement(query);
-
       ps.setString(1, email);
       ps.setString(2, password);
 
       ResultSet rs = ps.executeQuery();
       if (rs.next()) {
-        isVerified = true;
+        int userId = rs.getInt("user_id");
+        // Get organizer_id from organizers table
+        String orgQuery = "select organizer_id from organizers where user_id=?";
+        PreparedStatement orgPs = con.prepareStatement(orgQuery);
+        orgPs.setInt(1, userId);
+        ResultSet orgRs = orgPs.executeQuery();
+        if (orgRs.next()) {
+          SessionManager.setOrganizerId(orgRs.getInt("organizer_id"));
+          isVerified = true;
+        }
       }
-      ps.close();
-      rs.close();
-      con.close();
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
     return isVerified;
-
   }
 
   void Login() {

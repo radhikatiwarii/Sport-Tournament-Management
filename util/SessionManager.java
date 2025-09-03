@@ -20,4 +20,14 @@ public class SessionManager {
     public static int getPlayer_Id() {
         return Player_Id;
     }
+    
+    private static int organizerId;
+
+    public static void setOrganizerId(int id) {
+        organizerId = id;
+    }
+
+    public static int getOrganizerId() {
+        return organizerId;
+    }
 }

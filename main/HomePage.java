@@ -11,13 +11,15 @@ import organizer.OrganizerDashboard;
 import player.PlayerDashboard;
 
 public class HomePage {
+  
 
     public void homepage() {
         Scanner sc = new Scanner(System.in);
         try {
             while (true) {
                 System.out.println();
-                System.out.println("_________________________________________________________________________");
+              System.out.println("_________________________________________________________________________");
+               System.out.println("Welcome To The Sport Tournament management System!");
                 System.out.println("#---Welcome To The Sport Tournament management System!---#");
                 System.out.println();
                 System.out.println("+-----------------------------------+");

@@ -3,6 +3,8 @@ package organizer;
 import util.Databaseconnection;
 import util.InputUtil;
 import util.SafeInput;
+import util.SessionManager;
+import util.OrganizerTournamentValidator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -67,7 +69,7 @@ public class MatchSchedule {
             sc.nextLine();
             getDate();
 
-            String query = "INSERT INTO matches (team1id, team2id, match_date, tournamentid) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO matches (team1id, team2id, match_date, tournamentid) VALUES (?, ?, ?, ?)";
             try (PreparedStatement ps = con.prepareStatement(query)) {
                 ps.setInt(1, team1Id);
                 ps.setInt(2, team2Id);
@@ -150,6 +152,14 @@ public class MatchSchedule {
                 System.out.println(" Invalid tournament ID.");
                 return;
             }
+            
+            // Check if organizer is assigned to this tournament
+            int organizerId = SessionManager.getOrganizerId();
+            if (!OrganizerTournamentValidator.isOrganizerAssignedToTournament(organizerId, tournamentId)) {
+                OrganizerTournamentValidator.showAccessDeniedMessage();
+                return;
+            }
+            
             MatchSchedule.tournamentId = tournamentId;
         } catch (Exception e) {
             System.out.println("An error Occur :" + e.getMessage());
@@ -176,7 +186,7 @@ public class MatchSchedule {
                     }
                     case 2: {
                         System.out.println("Exiting....");
-                        break;
+                        return;
                     }
                     default: {
                         System.out.println("Invalid Choice , Try again:");

@@ -469,4 +469,29 @@ public class EventRegistration {
             System.out.println("Error :" + e.getMessage());
         }
     }
+    
+    private void updateTournamentRevenue(Connection con, int tournamentId, double registrationFee) {
+        try {
+            // Insert revenue entry for this registration
+            String revenueQuery = "INSERT INTO revenue (tournament_id, source, amount, revenue_date, organizer_fee, refund_amount) " +
+                                "VALUES (?, 'Player Registration', ?, CURDATE(), ?, 0)";
+            
+            // Calculate organizer fee (10% of registration fee)
+            double organizerFee = registrationFee * 0.10;
+            
+            PreparedStatement revenuePs = con.prepareStatement(revenueQuery);
+            revenuePs.setInt(1, tournamentId);
+            revenuePs.setDouble(2, registrationFee);
+            revenuePs.setDouble(3, organizerFee);
+            
+            int revenueRows = revenuePs.executeUpdate();
+            if (revenueRows > 0) {
+                System.out.println("✅ Revenue updated: ₹" + registrationFee + " (Organizer fee: ₹" + organizerFee + ")");
+            }
+            
+        } catch (Exception e) {
+            System.out.println("⚠️ Warning: Could not update revenue - " + e.getMessage());
+            // Don't fail the registration if revenue update fails
+        }
+    }
 }

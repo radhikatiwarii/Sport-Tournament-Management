@@ -61,13 +61,13 @@ public class OrganizerDashboard {
             System.out.println("+-------------------------------------------------------+");
             System.out.println("|                  Organizer Menu                       |");
             System.out.println("+-------------------------------------------------------+");
-            System.out.println("|1. Tournamet Management                                |");
-            System.out.println("|2. Venue management                                    |");
-            System.out.println("|3. View Players                                        |");
-            System.out.println("|4. Team creation                                       |");
-            System.out.println("|5. Math Scheduling                                     |");
-            System.out.println("|6. Play Match                                          |");
-            System.out.println("|7. declareMatchWinner                                  |");
+            System.out.println("|1. View Organizer Assigned to tournament               |");
+            System.out.println("|2. Tournamet Management                                |");
+            System.out.println("|3. Venue management                                    |");
+            System.out.println("|4. View Players                                        |");
+            System.out.println("|5. Team creation                                       |");
+            System.out.println("|6. Math Scheduling                                     |");
+            System.out.println("|7. Play Match                                          |");
             System.out.println("|8. View Match Results                                  |");
             System.out.println("|9. manage revenue                                      |");
             System.out.println("|10. Exit                                               |");
@@ -80,39 +80,41 @@ public class OrganizerDashboard {
                 sc.nextLine();
 
                 switch (choice) {
-                    case 1:
+                     case 1:
+                       ViewOrganizerAssignedToTournament vot = new  ViewOrganizerAssignedToTournament();
+                       vot.viewOrganizerAssignedToTournament();
+                       break;
+
+                    case 2:
                         TournamentManagement tm = new TournamentManagement();
                         tm.viewTournamentDetails();
                         break;
 
-                    case 2:
+                    case 3:
                         VenueManagement vm = new VenueManagement();
                         vm.display();
                         break;
 
-                    case 3:
+                    case 4:
                         ViewPlayers vp = new ViewPlayers();
                         vp.viewPlayers();
                         break;
 
-                    case 4:
+                    case 5:
                         CreateTeam ct = new CreateTeam();
                         ct.getTeamName();
                         break;
 
-                    case 5:
+                    case 6:
                         MatchSchedule ms = new MatchSchedule();
                         ms.scheduleMatch();
                         break;
-                    case 6: {
+                    case 7: 
                         Match m = new Match();
                         m.teamId();
                         break;
-                    }
-                    case 7:
-                        DeclareMatchWinner dmr = new DeclareMatchWinner();
-                        dmr.declareMatchWinner();
-                        break;
+                    
+                   
                     case 8:
                         ViewMatchResult vmr = new ViewMatchResult();
                         vmr.viewResults();

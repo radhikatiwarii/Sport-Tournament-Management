@@ -6,14 +6,14 @@ import util.Databaseconnection;
 public class Main {
 
     public static void main(String[] args) {
-        HomePage main = new HomePage();
-        main.homepage();
+        HomePage homePage = new HomePage();
+        homePage.homepage();
         
 
         try (Connection con = Databaseconnection.getConnection()) {
             System.out.println("Database connected successfully !");
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (java.sql.SQLException e) {
+            System.err.println("Database connection failed: " + e.getMessage());
         }
     }
 }

@@ -8,10 +8,10 @@ public class Password {
 
     private static final String ALGORITHM = "AES";
     private static final String SECRET_KEY = generateSecretKey(); // Dynamic secret key
-    private Scanner sc = new Scanner(System.in);
+
     
     private static String generateSecretKey() {
-        return "SportTournament16"; // 16 chars for AES
+        return "SportTournament16";  
     }
 
     
@@ -35,8 +35,8 @@ public class Password {
         return new String(decrypted);
     }
 
-    public String getPassword() {
-        UniversalInput.pushStep(() -> getPassword());
+    public String getPassword(Scanner sc) {
+        UniversalInput.pushStep(() -> getPassword(sc));
         while (true) {
             int attempt = 0;
             while (attempt < 3) {
@@ -79,10 +79,10 @@ public class Password {
                     System.out.println("An error Occurred: " + e.getMessage());
                 }
             }
-            retryLogic(attempt);
+            retryLogic(attempt, sc);
         }
     }
-    private void retryLogic(int attempt) {
+    private void retryLogic(int attempt, Scanner sc) {
         System.out.println("You have tried 3 Times,");
         int reAttempt = 0;
         while (reAttempt < 3) {

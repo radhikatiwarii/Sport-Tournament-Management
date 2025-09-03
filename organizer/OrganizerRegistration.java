@@ -191,7 +191,7 @@ public class OrganizerRegistration {
 
     public void getPassword() {
         Password passwordUtil = new Password();
-        password = passwordUtil.getPassword();
+        password = passwordUtil.getPassword(sc);
         if (password != null) {
             System.out.println("Encrypted Password: " + password);
         }

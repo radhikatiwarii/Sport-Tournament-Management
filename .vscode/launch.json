@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Test",
+            "request": "launch",
+            "mainClass": "main.Test",
+            "projectName": "SportTournament_a09e8aa5"
+        },
+        {
+            "type": "java",
+            "name": "ViewOrganizerAssignedToTournament",
+            "request": "launch",
+            "mainClass": "organizer.ViewOrganizerAssignedToTournament",
+            "projectName": "SportTournament_a09e8aa5"
+        },
+        {
+            "type": "java",
             "name": "Match",
             "request": "launch",
             "mainClass": "organizer.Match",

@@ -31,8 +31,11 @@ public class UniversalInput {
     private static void goBack() {
         if (navigationStack.size() > 1) {
             navigationStack.pop(); // Remove current step
-            // Don't run previous step automatically
-            // Just signal back was pressed
+            Runnable previousStep = navigationStack.peek();
+            previousStep.run(); // Go to previous step
+        } else if (navigationStack.size() == 1) {
+            navigationStack.clear();
+            System.out.println("Going back to dashboard...");
         }
     }
     

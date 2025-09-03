@@ -53,7 +53,13 @@ public class CreateTeam {
             while (attempt < 3) {
                 try {
                     System.out.print("Enter Team Name: ");
-                    String input = SafeInput.getLine(sc).trim();
+                    String input = SafeInput.getLine(sc);
+                    
+                    if (input == null) {
+                        return; // Back was pressed
+                    }
+                    
+                    input = input.trim();
                     System.out.println("_____________________________________");
 
                     if (input.equalsIgnoreCase("Exit")) {
@@ -69,13 +75,14 @@ public class CreateTeam {
                         return;
                     } else {
                         System.out.println("Invalid name! Use letters, numbers, and spaces (min 3 chars).");
-
+                        attempt++;
                     }
                 } catch (Exception e) {
                     System.out.println("Error Occurs : " + e.getMessage());
                 }
 
             }
+            retryLogic(attempt);
         }
     }
 
@@ -119,7 +126,13 @@ public class CreateTeam {
                 showAvailableCoachIds();
                 System.out.println("_______________________________________________");
                 System.out.print("Enter Coach ID: ");
-                String input = SafeInput.getLine(sc).trim();
+                String input = SafeInput.getLine(sc);
+                
+                if (input == null) {
+                    return; // Back was pressed
+                }
+                
+                input = input.trim();
                 System.out.println("_____________________________________");
 
                 if (input.equalsIgnoreCase("Exit"))
@@ -182,8 +195,13 @@ public class CreateTeam {
                 System.out.println("_______________________________________________");
 
                 System.out.print("Enter Tournament ID: ");
-                String input =SafeInput.getLine(sc).trim();
-
+                String input = SafeInput.getLine(sc);
+                
+                if (input == null) {
+                    return; // Back was pressed
+                }
+                
+                input = input.trim();
                 System.out.println("_____________________________________");
 
                 if (input.equalsIgnoreCase("Exit"))
@@ -208,7 +226,13 @@ public class CreateTeam {
         int attempt = 0;
         while (attempt < 3) {
             System.out.print("Enter Team Status (Active/Inactive/Disqualified): ");
-            String input = SafeInput.getLine(sc).trim();
+            String input = SafeInput.getLine(sc);
+            
+            if (input == null) {
+                return; // Back was pressed
+            }
+            
+            input = input.trim();
             System.out.println("_____________________________________");
 
             if (input.equalsIgnoreCase("Exit"))
@@ -229,7 +253,13 @@ public class CreateTeam {
         int attempt = 0;
         while (attempt < 3) {
             System.out.print("Enter full path to team logo image: ");
-            String input = SafeInput.getLine(sc).trim();
+            String input = SafeInput.getLine(sc);
+            
+            if (input == null) {
+                return; // Back was pressed
+            }
+            
+            input = input.trim();
             System.out.println("_____________________________________");
 
             if (input.equalsIgnoreCase("Exit")) {
@@ -252,7 +282,13 @@ public class CreateTeam {
         while (attempt < 3) {
             try {
                 System.out.print("Enter total championships won: ");
-                String input = SafeInput.getLine(sc).trim();
+                String input = SafeInput.getLine(sc);
+                
+                if (input == null) {
+                    return; // Back was pressed
+                }
+                
+                input = input.trim();
                 System.out.println("_____________________________________");
 
                 if (input.equalsIgnoreCase("Exit"))
@@ -270,6 +306,22 @@ public class CreateTeam {
                 System.out.println("Error Occurred: " + e.getMessage());
                 attempt++;
             }
+        }
+    }
+    
+    private void retryLogic(int attempt) {
+        System.out.println("You have tried 3 times.");
+        System.out.println("1. Try Again");
+        System.out.println("2. Exit");
+        System.out.print("Choose an option: ");
+        
+        try {
+            String choice = SafeInput.getLine(sc);
+            if (choice == null || choice.trim().equals("2")) {
+                return;
+            }
+        } catch (Exception e) {
+            System.out.println("Exiting...");
         }
     }
 }

@@ -8,9 +8,13 @@ public class SafeInput {
     
     private static final int INVALID_INPUT = -1;
     
-    // Use UniversalInput for all string inputs
     public static String getLine(Scanner sc) {
-        return UniversalInput.getInput(sc, "");
+        try {
+            return UniversalInput.getInput(sc, "");
+        } catch (NoSuchElementException e) {
+            handleInputTermination();
+            return null;
+        }
     }
     
     public static String getLineWithPrompt(Scanner sc, String prompt) {
