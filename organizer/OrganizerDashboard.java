@@ -66,11 +66,10 @@ public class OrganizerDashboard {
             System.out.println("|3. Venue management                                    |");
             System.out.println("|4. View Players                                        |");
             System.out.println("|5. Team creation                                       |");
-            System.out.println("|6. Math Scheduling                                     |");
+            System.out.println("|6. Match Scheduling                                    |");
             System.out.println("|7. Play Match                                          |");
             System.out.println("|8. View Match Results                                  |");
-            System.out.println("|9. manage revenue                                      |");
-            System.out.println("|10. Exit                                               |");
+            System.out.println("|9. Exit                                                |");
             System.out.println("+-------------------------------------------------------+");
 
             System.out.print("Choose an Option: ");
@@ -80,10 +79,10 @@ public class OrganizerDashboard {
                 sc.nextLine();
 
                 switch (choice) {
-                     case 1:
-                       ViewOrganizerAssignedToTournament vot = new  ViewOrganizerAssignedToTournament();
-                       vot.viewOrganizerAssignedToTournament();
-                       break;
+                    case 1:
+                        ViewOrganizerAssignedToTournament vot = new ViewOrganizerAssignedToTournament();
+                        vot.viewOrganizerAssignedToTournament();
+                        break;
 
                     case 2:
                         TournamentManagement tm = new TournamentManagement();
@@ -109,22 +108,15 @@ public class OrganizerDashboard {
                         MatchSchedule ms = new MatchSchedule();
                         ms.scheduleMatch();
                         break;
-                    case 7: 
+                    case 7:
                         Match m = new Match();
                         m.teamId();
                         break;
-                    
-                   
                     case 8:
                         ViewMatchResult vmr = new ViewMatchResult();
                         vmr.viewResults();
                         break;
                     case 9:
-                        ManageRevenue mr = new ManageRevenue();
-                        mr.manage_revenue();
-                        break;
-
-                    case 10:
                         System.out.println(" Exiting Organizer Menu...");
                         return;
 
@@ -137,13 +129,3 @@ public class OrganizerDashboard {
         }
     }
 }
-
-/*
- * mere organizer ka kam h vanue manage krna or tournament to admin create kr
- * rha h pr agr organizer ke pass authority
- * ho tournament create krne ki to kr le match schedule krna team bnana games
- * khilvana or score track krkr result
- * declare krna player ko tournament ke bareme notify krna or tournament se jo
- * venue generate hua usko manage krna usko
- * account me ad krna ye mere organizer ke kaam h
- */

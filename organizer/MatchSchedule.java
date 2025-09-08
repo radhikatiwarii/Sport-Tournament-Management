@@ -90,7 +90,7 @@ public class MatchSchedule {
     }
 
     private boolean isValidTeam(Connection con, int teamId) throws SQLException {
-        String query = "SELECT team_id FROM teams WHERE id = ?";
+        String query = "SELECT team_id FROM teams WHERE team_id = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setInt(1, teamId);
             ResultSet rs = ps.executeQuery();
@@ -99,7 +99,7 @@ public class MatchSchedule {
     }
 
     private boolean isValidTournament(Connection con, int tournamentId) throws SQLException {
-        String query = "SELECT tournament_id FROM tournaments WHERE id = ?";
+        String query = "SELECT tournament_id FROM tournaments WHERE tournament_id = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setInt(1, tournamentId);
             ResultSet rs = ps.executeQuery();
