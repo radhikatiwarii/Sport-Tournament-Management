@@ -77,7 +77,7 @@ public class AdminDashboard {
                 System.err.println("|6. View Feedback                                          |");
                 System.out.println("|7. Generate Report                                        |");
                 System.err.println("|0. Logout                                                 |");
-                System.out.println("+-----------------------------------=----------------------+");
+                System.out.println("+----------------------------------------------------------+");
 
                 String option = GlobalInputHandler.getInputWithTrim(sc, "Enter your option: ");
                 if (option == null) {
@@ -95,10 +95,12 @@ public class AdminDashboard {
                         vp.viewCoachAssignedToPlayer();
                         break;
                     case "3":
-                        CreateTournament.createTournament();
+                    CreateTournament ct=new CreateTournament();
+                       ct.getTournamentName();
                         break;
                     case "4":
-                        AssignOrganizer.assignOrganizer();
+                    AssignOrganizer ao=new AssignOrganizer();
+                        ao.assignOrganizer();
                         break;
                     case "5":
                         ViewUpdateDeleteTournament vt = new ViewUpdateDeleteTournament();

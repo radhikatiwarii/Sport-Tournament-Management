@@ -59,9 +59,9 @@ public class TrackPerformance {
             System.out.println("Performance Records:");
             while (rs.next()) {
                 System.out.println("Match ID: " + rs.getInt("match_id"));
-                System.out.println("Goals: " + rs.getInt("goals"));
+                System.out.println("Score: " + rs.getInt("score"));
                 System.out.println("Assists: " + rs.getInt("assists"));
-                System.out.println("Fitness Rating: " + rs.getInt("fitness_rating"));
+                System.out.println("Fitness Rating: " + rs.getInt("Fitness_Ratting"));
                 System.out.println("----------------------------------");
             }
 
@@ -104,5 +104,9 @@ public class TrackPerformance {
                 }
             }
         }
+    }
+    public static void main(String[] args) {
+        TrackPerformance tf=new TrackPerformance();
+        tf.performance();
     }
 }

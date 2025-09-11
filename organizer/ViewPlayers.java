@@ -1,24 +1,39 @@
 package organizer;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Scanner;
 
 import util.Databaseconnection;
+import util.InputUtil;
 
 public class ViewPlayers {
+        Scanner sc = new Scanner(System.in);
 
         void viewPlayers() {
-                try (Connection con = Databaseconnection.getConnection()) {
-                        String query = "SELECT p.Player_id, u.user_name as player_name, p.user_id, p.team_id, p.address, p.age, \n"
-                                        + //
-                                        "       p.specialization, p.player_status, p.match_played, p.goal_scored,p.player_role\n"
-                                        + //
-                                        "FROM players p\n" + //
-                                        "JOIN users u ON p.user_id = u.user_id;";
+                System.out.print("Enter Tournament ID: ");
+                int tournamentId = InputUtil.chooseInt(sc);
+                sc.nextLine();
 
-                        Statement stmt = con.createStatement();
-                        ResultSet rs = stmt.executeQuery(query);
+                if (!isValidTournamentId(tournamentId)) {
+                        System.out.println("Invalid Tournament ID. No such tournament found.");
+                        return;
+                }
+                try (Connection con = Databaseconnection.getConnection()) {
+                        String query = "SELECT p.Player_id, u.user_name AS player_name, p.user_id, p.team_id, p.address, p.age, "
+                                        +
+                                        "p.specialization, p.player_status, p.match_played, p.goal_scored, p.player_role "
+                                        +
+                                        "FROM players p " +
+                                        "JOIN users u ON p.user_id = u.user_id " +
+                                        "JOIN teams t ON p.team_id = t.team_id " +
+                                        "WHERE t.tournament_id = ?";
+
+                        PreparedStatement ps = con.prepareStatement(query);
+                        ps.setInt(1, tournamentId);
+                        ResultSet rs = ps.executeQuery();
 
                         System.out.println("Player Information:");
                         System.out.println(
@@ -62,5 +77,18 @@ public class ViewPlayers {
                         e.printStackTrace();
                 }
 
+        }
+
+        private boolean isValidTournamentId(int tournamentId) {
+                try (Connection con = Databaseconnection.getConnection()) {
+                        String query = "SELECT tournament_id FROM tournaments WHERE tournament_id = ?";
+                        PreparedStatement ps = con.prepareStatement(query);
+                        ps.setInt(1, tournamentId);
+                        ResultSet rs = ps.executeQuery();
+                        return rs.next();
+                } catch (Exception e) {
+                        e.printStackTrace();
+                        return false;
+                }
         }
 }

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TrackPerformance",
+            "request": "launch",
+            "mainClass": "coach.TrackPerformance",
+            "projectName": "SportTournament_a09e8aa5"
+        },
+        {
+            "type": "java",
             "name": "Test",
             "request": "launch",
             "mainClass": "main.Test",

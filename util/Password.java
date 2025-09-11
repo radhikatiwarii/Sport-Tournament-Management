@@ -11,7 +11,7 @@ public class Password {
 
     
     private static String generateSecretKey() {
-        return "SportTournament16";  
+        return "SportTournament1";  
     }
 
     
@@ -41,8 +41,9 @@ public class Password {
             int attempt = 0;
             while (attempt < 3) {
                 try {
-                    String input = UniversalInput.getInputTrim(sc, "Enter your password: ");
-                    if (input == null) return "BACK_COMMAND"; // Back was pressed
+                    System.out.println("Enter Your Password");
+                    String input =sc.nextLine();
+                    if (input == null) return "BACK_COMMAND";  
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return null;

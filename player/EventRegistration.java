@@ -260,12 +260,12 @@ public class EventRegistration {
                         System.out.println("age cannot be empty, Please enter  your valid age:");
                         System.out.println("_______________________________________________________________");
                         attempt++;
-                    } else if (input.matches("\\d{1,3}")) {
+                    } else if (input.matches("^(1[8-9]|[2-5][0-9])$")) {
                         age = Integer.parseInt(input);
                         getSpecialization();
                         return;
                     } else {
-                        System.out.println("Invalid age ! Enter in digit !");
+                        System.out.println("Invalid age ! Enter in digit or you are ineligible !");
                         System.out.println("_______________________________________________________________");
                     }
                     attempt++;
@@ -486,11 +486,11 @@ public class EventRegistration {
             
             int revenueRows = revenuePs.executeUpdate();
             if (revenueRows > 0) {
-                System.out.println("✅ Revenue updated: ₹" + registrationFee + " (Organizer fee: ₹" + organizerFee + ")");
+                System.out.println(" Revenue updated: ₹" + registrationFee + " (Organizer fee: ₹" + organizerFee + ")");
             }
             
         } catch (Exception e) {
-            System.out.println("⚠️ Warning: Could not update revenue - " + e.getMessage());
+            System.out.println(" Warning: Could not update revenue - " + e.getMessage());
             // Don't fail the registration if revenue update fails
         }
     }

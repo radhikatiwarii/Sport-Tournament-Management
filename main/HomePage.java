@@ -1,7 +1,10 @@
 package main;
 
+import util.Databaseconnection;
 import util.InputUtil;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -12,11 +15,20 @@ import player.PlayerDashboard;
 
 public class HomePage {
   
+    public void autoCloseTournaments() {
+    try (Connection con = Databaseconnection.getConnection()) {
+        String query = "UPDATE tournaments SET status = 'closed' WHERE end_date < CURRENT_DATE AND status = 'open'";
+        PreparedStatement ps = con.prepareStatement(query);
+        int updated = ps.executeUpdate();
+    } catch (Exception e) {
+e.printStackTrace();    }
+}
 
     public void homepage() {
         Scanner sc = new Scanner(System.in);
         try {
             while (true) {
+                autoCloseTournaments();
                 System.out.println();
               System.out.println("_________________________________________________________________________");
                System.out.println("Welcome To The Sport Tournament management System!");

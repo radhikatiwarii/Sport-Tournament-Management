@@ -18,31 +18,28 @@ import util.Databaseconnection;
 public class GenerateReport {
 
     void getTournamentId() {
-        try (Scanner sc = new Scanner(System.in)) {
-            System.out.print("Enter Tournament ID (or 'back' to return): ");
-            String input = SafeInput.getLine(sc);
-            
-            if (input == null || input.trim().equalsIgnoreCase("back")) {
-                System.out.println("Returning to previous menu...");
-                return;
-            }
-            
-            int tournament_id;
-            try {
-                tournament_id = Integer.parseInt(input.trim());
-            } catch (NumberFormatException e) {
-                System.err.println("Invalid input. Please enter a valid number.");
-                return;
-            }
-
-            if (!isValidTournament(tournament_id)) {
-                System.err.println("Invalid Tournament ID: " + tournament_id);
-                return;
-            }
-            generateSummaryReport(tournament_id);
-        } catch (Exception e) {
-            System.err.println("Error reading input: " + e.getMessage());
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Tournament ID (or 'back' to return): ");
+        String input = SafeInput.getLine(sc);
+        
+        if (input == null || input.trim().equalsIgnoreCase("back")) {
+            System.out.println("Returning to previous menu...");
+            return;
         }
+        
+        int tournament_id;
+        try {
+            tournament_id = Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid input. Please enter a valid number.");
+            return;
+        }
+
+        if (!isValidTournament(tournament_id)) {
+            System.err.println("Invalid Tournament ID: " + tournament_id);
+            return;
+        }
+        generateSummaryReport(tournament_id);
     }
 
     boolean isValidTournament(int tournament_id) {
@@ -78,11 +75,7 @@ public class GenerateReport {
                     "SELECT COUNT(DISTINCT coach_id) FROM teams WHERE tournament_id = ?", tournament_id);
             int totalMatches = getCountWithParam(con,
                     "SELECT COUNT(*) FROM matches WHERE tournament_id = ?", tournament_id);
-            int completedMatches = getCountWithParam(con,
-                    "SELECT COUNT(*) FROM match_result mr " +
-                            "JOIN matches m ON mr.match_id = m.match_id " +
-                            "WHERE m.tournament_id = ?",
-                    tournament_id);
+            int completedMatches = 0; // Simplified - no completed matches tracking
 
             // Display console report
             displayConsoleReport(tournamentInfo, totalPlayers, totalTeams, totalCoaches, totalMatches,
@@ -98,20 +91,18 @@ public class GenerateReport {
     }
 
     private String getTournamentInfo(Connection con, int tournament_id) throws SQLException {
-        String query = "SELECT t.name, t.start_date, t.end_date, t.status, v.name as venue_name " +
+        String query = "SELECT t.name, t.start_date, t.end_date, t.status " +
                 "FROM tournaments t " +
-                "LEFT JOIN venue v ON t.venue_id = v.venue_id " +
                 "WHERE t.tournament_id = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setInt(1, tournament_id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return String.format("Tournament: %s | Dates: %s to %s | Status: %s | Venue: %s",
+                    return String.format("Tournament: %s | Dates: %s to %s | Status: %s",
                             rs.getString("name"),
                             rs.getString("start_date"),
                             rs.getString("end_date"),
-                            rs.getString("status"),
-                            rs.getString("venue_name"));
+                            rs.getString("status"));
                 }
             }
         }
@@ -213,9 +204,8 @@ public class GenerateReport {
     private void addTournamentDetailsTable(Document document, Connection con, int tournamentId, Font headerFont)
             throws Exception {
         document.add(new Paragraph("Tournament Information", headerFont));
-        String query = "SELECT t.name, t.start_date, t.end_date, t.status, v.name as venue_name " +
+        String query = "SELECT t.name, t.start_date, t.end_date, t.status " +
                 "FROM tournaments t " +
-                "LEFT JOIN venue v ON t.venue_id = v.venue_id " +
                 "WHERE t.tournament_id = ?";
 
         PdfPTable tournamentTable = new PdfPTable(2);
@@ -234,8 +224,7 @@ public class GenerateReport {
                     tournamentTable.addCell(rs.getString("end_date"));
                     tournamentTable.addCell("Status");
                     tournamentTable.addCell(rs.getString("status"));
-                    tournamentTable.addCell("Venue");
-                    tournamentTable.addCell(rs.getString("venue_name"));
+
                 } else {
                     tournamentTable.addCell("Tournament ID");
                     tournamentTable.addCell(String.valueOf(tournamentId));
@@ -278,22 +267,17 @@ public class GenerateReport {
             throws Exception {
         document.add(new Paragraph("Match Results", headerFont));
         String query = "SELECT m.match_id, t1.team_name as team1, t2.team_name as team2, " +
-                "m.match_date, mr.team1_score, mr.team2_score, " +
-                "CASE WHEN mr.winner_team_id IS NOT NULL THEN tw.team_name ELSE 'Pending' END as winner " +
+                "m.match_date " +
                 "FROM matches m " +
                 "LEFT JOIN teams t1 ON m.team1_id = t1.team_id " +
                 "LEFT JOIN teams t2 ON m.team2_id = t2.team_id " +
-                "LEFT JOIN match_result mr ON m.match_id = mr.match_id " +
-                "LEFT JOIN teams tw ON mr.winner_team_id = tw.team_id " +
                 "WHERE m.tournament_id = ?";
 
-        PdfPTable matchTable = new PdfPTable(6);
+        PdfPTable matchTable = new PdfPTable(4);
         matchTable.addCell("Match ID");
         matchTable.addCell("Team 1");
         matchTable.addCell("Team 2");
         matchTable.addCell("Date");
-        matchTable.addCell("Score");
-        matchTable.addCell("Winner");
 
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setInt(1, tournamentId);
@@ -304,14 +288,7 @@ public class GenerateReport {
                     matchTable.addCell(rs.getString("team2"));
                     matchTable.addCell(rs.getString("match_date"));
 
-                    String score = "";
-                    if (rs.getObject("team1_score") != null) {
-                        score = rs.getInt("team1_score") + " - " + rs.getInt("team2_score");
-                    } else {
-                        score = "Not Played";
-                    }
-                    matchTable.addCell(score);
-                    matchTable.addCell(rs.getString("winner"));
+                    // Removed score column
                 }
             }
         }

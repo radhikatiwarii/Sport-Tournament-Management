@@ -191,14 +191,23 @@ public class CoachRegistration {
         }
     }
 
-    public void getPassword() {
+     public void getPassword() {
         Password passwordUtil = new Password();
-        password = passwordUtil.getPassword();
+        password = passwordUtil.getPassword(sc);
+        
+        if (password == null) {
+            return;
+        }
+        if ("BACK_COMMAND".equals(password)) {
+            getEmail();
+            return;
+        }
         if (password != null) {
             System.out.println("Encrypted Password: " + password);
         }
         getRole();
     }
+
 
     void getRole() {
         while (true) {

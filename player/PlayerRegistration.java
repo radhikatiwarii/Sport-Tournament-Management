@@ -195,7 +195,7 @@ public class PlayerRegistration {
     public void getPassword() {
         UniversalInput.pushStep(() -> getPassword());
         Password passwordUtil = new Password();
-        password = passwordUtil.getPassword();
+        password = passwordUtil.getPassword(sc);
         
         if (password == null) {
             return;

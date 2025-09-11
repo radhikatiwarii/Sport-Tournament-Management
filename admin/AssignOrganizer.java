@@ -9,7 +9,7 @@ import util.Databaseconnection;
 import util.InputUtil;
 
 public class AssignOrganizer {
-    public static void assignOrganizer() {
+    public   void assignOrganizer() {
         Scanner sc = new Scanner(System.in);
         try (Connection con = Databaseconnection.getConnection()) {
             System.out.print("Enter Tournament ID: ");
@@ -30,6 +30,7 @@ public class AssignOrganizer {
             int rows = ps.executeUpdate();
             if (rows > 0) {
                 System.out.println(" Organizer assigned successfully!");
+                updateOrganizer(tournamentId,organizerId); 
             } else {
                 System.out.println(" Failed to assign organizer. Check IDs.");
             }
@@ -38,6 +39,25 @@ public class AssignOrganizer {
         }
     }
 
+    public  void updateOrganizer(int tournamentId,int organizerId) {
+        
+        try (Connection con = Databaseconnection.getConnection()) {
+           
+            String query = "UPDATE organizers SET tournament_id = ? WHERE  organizer_id= ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, tournamentId);
+            ps.setInt(2, organizerId);
+
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                System.out.println(" Organizer assigned successfully!");
+            } else {
+                System.out.println(" Failed to assign organizer. Check IDs.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
      static void checkOrganizer(int organizerId) {
         try (Connection con = Databaseconnection.getConnection()) {
 

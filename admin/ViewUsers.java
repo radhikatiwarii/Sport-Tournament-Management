@@ -26,10 +26,10 @@ public class ViewUsers {
             ResultSet rs=stmt.executeQuery(query);
 
             System.out.println("Members in "+role);
-             System.out.println("+--------------------------------------------------------------------------------------------------------------+");
-            System.out.printf("|%-8s| %-15s| %-30s| %-25s| %-12s| %-10s| \n", 
+             System.out.println("+-------------------------------------------------------------------------------------------------------------------+");
+            System.out.printf("|%-8s| %-20s| %-30s| %-25s| %-12s| %-10s| \n", 
                               "User_ID", "Name", "Email_id", "Password", "Phone_No", "Role");
-            System.out.println("+--------------------------------------------------------------------------------------------------------------+");
+            System.out.println("+-------------------------------------------------------------------------------------------------------------------+");
             boolean hasResult=false;
 
             while (rs.next()) {
@@ -41,10 +41,10 @@ public class ViewUsers {
                 String Phone_No=rs.getString("phone_no");
                 String Role=rs.getString("role");
                
-                 System.out.printf("|%-8d| %-15s| %-30s| %-25s| %-12s| %-10s| \n", 
+                 System.out.printf("|%-8d| %-20s| %-30s| %-25s| %-12s| %-10s| \n", 
                                   User_ID, Name, Email_id, Password, Phone_No, Role);
 
-                System.out.println("+--------------------------------------------------------------------------------------------------------------+");
+                System.out.println("+-------------------------------------------------------------------------------------------------------------------+");
             }
              if (!hasResult) {
                 System.out.println("None "+ role+ " available yet.");

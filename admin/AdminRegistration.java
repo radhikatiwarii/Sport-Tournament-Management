@@ -192,7 +192,7 @@ public class AdminRegistration {
 
     public void getPassword() {
         Password passwordUtil = new Password();
-        password = passwordUtil.getPassword();
+        password = passwordUtil.getPassword(sc);
         
         if (password == null) {
             return;
