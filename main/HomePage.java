@@ -1,7 +1,7 @@
 package main;
 
 import util.Databaseconnection;
-import util.InputUtil;
+import util.SafeInput;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,7 +50,7 @@ e.printStackTrace();    }
                 System.out.println("+-----------------------------------+");
 
                 System.out.println("Choose an Option!");
-                int choose = InputUtil.chooseInt(sc);
+                int choose =SafeInput.getInt(sc);
 
                 sc.nextLine();
 

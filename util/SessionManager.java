@@ -30,4 +30,12 @@ public class SessionManager {
     public static int getOrganizerId() {
         return organizerId;
     }
+    private static int coach_id;
+    
+    public static void setCoach_id(int id) {
+        coach_id = id;
+    }
+    public static int getCoach_id() {
+        return coach_id;
+    }
 }

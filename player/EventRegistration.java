@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.Scanner;
 import util.Databaseconnection;
-import util.InputUtil;
+ 
 import util.SafeInput;
 import util.SessionManager;
 import util.Validation;
@@ -172,7 +172,7 @@ public class EventRegistration {
                 System.out.println("[2]. exit");
                 System.out.println("---------------------------");
                 System.out.println("choose an option :");
-                int choice = InputUtil.chooseInt(sc);
+                int choice = SafeInput.getInt(sc);
                 sc.nextLine();
                 switch (choice) {
                     case 1: {

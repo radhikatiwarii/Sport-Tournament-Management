@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 import util.Databaseconnection;
-import util.InputUtil;
+import util.SafeInput;
+ 
 
 public class JoinTeam {
     Scanner sc = new Scanner(System.in);
@@ -18,7 +19,7 @@ public class JoinTeam {
         listTeams(tournamentId);
 
         System.out.println("Enter the Team ID you want to join:");
-        int teamId = InputUtil.chooseInt(sc);
+        int teamId =  SafeInput.getInt(sc);
 
         if (!isTeamValid(teamId, tournamentId)) {
             System.out.println("Invalid Team ID! Please select a valid team.");

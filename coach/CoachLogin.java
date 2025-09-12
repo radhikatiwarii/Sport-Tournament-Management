@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 
 import util.Databaseconnection;
-import util.SafeInput;
+import util.SessionManager;
 import util.UniversalInput;
 
 public class CoachLogin {
@@ -56,6 +56,7 @@ public class CoachLogin {
       int coach_id=verifyUser(email, password) ;
         if (coach_id != -1) {
             System.out.println("Login Successful! Welcome, " + email);
+            SessionManager.setCoach_id(coach_id);
             return coach_id; 
         } else {
             attempt--;

@@ -3,7 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Scanner;
 import util.Databaseconnection;
-import util.InputUtil;
+ 
 import util.SafeInput;
 
 public class UpdateMatchResult {
@@ -11,11 +11,11 @@ public class UpdateMatchResult {
         public void updateMatchResult() {
         try {
             System.out.print("Enter the Match ID to update: ");
-            int matchId = InputUtil.chooseInt(sc);
+            int matchId =SafeInput.getInt(sc);
             sc.nextLine();
 
             System.out.print("Enter the Winner Team ID: ");
-            int winnerTeamId =InputUtil.chooseInt(sc);
+            int winnerTeamId =SafeInput.getInt(sc);
             sc.nextLine();
             if (!isValidTeam(winnerTeamId)) {
                 System.out.println(" Invalid Team ID. Please try again.");

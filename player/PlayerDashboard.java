@@ -1,6 +1,7 @@
 package player;
 
-import util.InputUtil;
+ 
+import util.SafeInput;
 import util.SessionManager;
 
 import java.util.Scanner;
@@ -19,7 +20,7 @@ public class PlayerDashboard {
             System.out.println(" 3. Back");
             System.out.println("--------------------------------------------");
             System.out.println("--------------------------------------------");
-            int choice = InputUtil.chooseInt(sc);
+            int choice =     SafeInput.getInt(sc);
             sc.nextLine();
 
             try {
@@ -62,21 +63,20 @@ public class PlayerDashboard {
         while (true) {
             System.out.println("+-------------------------------------------------------+");
             System.out.println("|1.  Event Registration                                 |");
-            System.out.println("|2.  Show Player Information                            |");
-            System.out.println("|3.  Assign Coach To Player                             |");
-            System.out.println("|4.  Event Description                                  |");
-            System.out.println("|5.  View Schedule                                      |");
-            System.out.println("|6.  Event registration Opening Date &cClosing Date     |");
-            System.out.println("|7.  Check Player Wollet Balance                        |");
-            System.out.println("|8.  Join a Team                                        |");
-            System.out.println("|9.  View My Team Details                               |");
-            System.out.println("|10. View Match Results                                 |");
-            System.out.println("|11. Give Feedback on Matches                           |");
-            System.out.println("|12. Back                                               |");
+            System.out.println("|2.  Assign Coach To Player                             |");
+            System.out.println("|3.  Event Description                                  |");
+            System.out.println("|4.  View Schedule                                      |");
+            System.out.println("|5.  Event registration Opening Date &cClosing Date     |");
+            System.out.println("|6.  Check Player Wollet Balance                        |");
+            System.out.println("|7.  Join a Team                                        |");
+            System.out.println("|8.  View My Team Details                               |");
+            System.out.println("|9.  View Match Results                                 |");
+            System.out.println("|10. Give Feedback on Matches                           |");
+            System.out.println("|11. Back                                               |");
             System.out.println("+-------------------------------------------------------+");
 
             System.out.println("Choose an option What you Want :");
-            int choice = InputUtil.chooseInt(sc);
+            int choice =  SafeInput.getInt(sc);
 
             sc.nextLine();
 
@@ -90,12 +90,8 @@ public class PlayerDashboard {
                     er.registerPlayer(tournamentId);
                     break;
                 }
+                
                 case 2: {
-                    PlayerInformation pi = new PlayerInformation();
-                    pi.connection();
-                    break;
-                }
-                case 3: {
                     System.out.println("Enter Player_id");
                     int player_id = sc.nextInt();
                     sc.nextLine();
@@ -103,18 +99,18 @@ public class PlayerDashboard {
                     cap.assignCoachToPlayer(player_id);
                     break;
                 }
-                case 4: {
+                case 3: {
                     EventDescription ed = new EventDescription();
                     ed.viewEventDetails();
                     break;
                 }
-                case 5: {
+                case 4: {
                     ViewSchedule vs = new ViewSchedule();
                     vs.viewSchedule();
                     break;
                 }
 
-                case 6: {
+                case 5: {
                     System.out.print("Enter Tournament ID: ");
                     int tournamentId = sc.nextInt();
                     System.out.println("___________________________________________");
@@ -129,7 +125,7 @@ public class PlayerDashboard {
                     break;
                 }
 
-                case 7: {
+                case 6: {
                     try {
                         System.out.println("Enter your Player ID:");
                         int playerId = sc.nextInt();
@@ -162,7 +158,7 @@ public class PlayerDashboard {
                         e.printStackTrace();
                     }
                 }
-                case 8: {
+                case 7: {
                     JoinTeam jt = new JoinTeam();
                     int player_id = SessionManager.getPlayer_Id();
                     System.out.println("___________________________________________");
@@ -176,7 +172,7 @@ public class PlayerDashboard {
                     break;
                 }
 
-                case 9: {
+                case 8: {
                     TeamDetails td = new TeamDetails();
                     System.out.print("Enter your Player ID: ");
                     int playerId = sc.nextInt();
@@ -185,13 +181,13 @@ public class PlayerDashboard {
                     break;
                 }
               
-                case 10: {
+                case 9: {
                     ViewMatchResult vmr = new ViewMatchResult();
                     vmr.viewResults();
                     break;
                 }
 
-                case 11: {
+                case 10: {
                     GiveFeedback feedbackObj = new GiveFeedback();
                     System.out.print("Enter your Player ID: ");
                     int player_id = sc.nextInt();
@@ -200,7 +196,7 @@ public class PlayerDashboard {
                     feedbackObj.submitFeedback(player_id);
                     break;
                 }
-                case 12: {
+                case 11: {
                     System.out.println("Back");
                     System.out.println("___________________________________________");
                     return;

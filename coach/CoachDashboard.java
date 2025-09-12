@@ -1,7 +1,9 @@
 package coach;
 
-import util.InputUtil;
+ 
 import java.util.Scanner;
+
+import util.SafeInput;
 
 public class CoachDashboard {
 
@@ -17,7 +19,7 @@ public class CoachDashboard {
             System.out.println(" 3. Back");
             System.out.println("--------------------------------------------");
             System.out.println("--------------------------------------------");
-            int choice = InputUtil.chooseInt(sc);
+            int choice =SafeInput.getInt(sc);
             sc.nextLine();
 
             try {
@@ -78,7 +80,7 @@ public class CoachDashboard {
             System.out.println("|7. Back                                                 |");
             System.out.println("+--------------------------------------------------------+");
             System.out.println("Choose an option What you Want :");
-            int choice = InputUtil.chooseInt(sc);
+            int choice = SafeInput.getInt(sc);
 
             sc.nextLine();
 

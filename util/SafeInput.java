@@ -34,6 +34,8 @@ public class SafeInput {
         }
     }
     
+    
+    
     private static void handleInputTermination() {
         System.err.println("Input terminated (Ctrl+Z detected). Exiting...");
         System.exit(0);

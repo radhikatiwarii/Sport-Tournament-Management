@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 import util.Databaseconnection;
-import util.InputUtil;
 import util.Password;
 import util.SafeInput;
 import util.Validation;
@@ -32,7 +31,7 @@ public class CoachRegistration {
                 System.out.println("[1]. Try Again");
                 System.out.println("[2]. exit");
                 System.out.println("choose an option :");
-                int choice = InputUtil.chooseInt(sc);
+                int choice =SafeInput.getInt(sc);
                 sc.nextLine();
                 switch (choice) {
                     case 1: {
@@ -202,9 +201,7 @@ public class CoachRegistration {
             getEmail();
             return;
         }
-        if (password != null) {
-            System.out.println("Encrypted Password: " + password);
-        }
+        
         getRole();
     }
 

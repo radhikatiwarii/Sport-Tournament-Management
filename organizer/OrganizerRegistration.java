@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.util.Scanner;
 
 import util.Databaseconnection;
-import util.InputUtil;
 import util.Password;
 import util.SafeInput;
 import util.Validation;
@@ -31,7 +30,7 @@ public class OrganizerRegistration {
                 System.out.println("[1]. Try Again");
                 System.out.println("[2]. exit");
                 System.out.println("choose an option :");
-                int choice = InputUtil.chooseInt(sc);
+                int choice =SafeInput.getInt(sc);
                 sc.nextLine();
                 switch (choice) {
                     case 1: {
@@ -192,9 +191,7 @@ public class OrganizerRegistration {
     public void getPassword() {
         Password passwordUtil = new Password();
         password = passwordUtil.getPassword(sc);
-        if (password != null) {
-            System.out.println("Encrypted Password: " + password);
-        }
+        
         getRole();
     }
     void getRole() {

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
-import util.InputUtil;
+ import util.SafeInput;
 
 public class TeamManagement {
     Scanner sc = new Scanner(System.in);
@@ -36,7 +36,7 @@ public class TeamManagement {
             System.out.println("-----------------------------------------------");
 
             System.out.print("Choose option: ");
-            int choice = InputUtil.chooseInt(sc);
+            int choice = SafeInput.getInt(sc);
 
             switch (choice) {
                 case 1:
@@ -105,7 +105,7 @@ public class TeamManagement {
 
     private void assignCaptain(int teamId) {
         System.out.print("Enter Player ID to assign as Captain: ");
-        int Player_id = InputUtil.chooseInt(sc);
+        int Player_id =SafeInput.getInt(sc);
         try {
             PreparedStatement ps = con
                     .prepareStatement("UPDATE players SET player_role = 'Captain' WHERE Player_id = ?");
@@ -119,7 +119,7 @@ public class TeamManagement {
 
     private void removePlayer(int teamId) {
         System.out.print("Enter Player ID to remove: ");
-        int player_id = InputUtil.chooseInt(sc);
+        int player_id =SafeInput.getInt(sc);
         try {
             PreparedStatement ps = con.prepareStatement("UPDATE players SET team_id = NULL WHERE Player_id = ?");
             ps.setInt(1, player_id);

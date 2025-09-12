@@ -6,18 +6,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import util.Databaseconnection;
-import util.InputUtil;
+import util.SafeInput;
+ 
 
 public class AssignOrganizer {
     public   void assignOrganizer() {
         Scanner sc = new Scanner(System.in);
         try (Connection con = Databaseconnection.getConnection()) {
             System.out.print("Enter Tournament ID: ");
-            int tournamentId = InputUtil.chooseInt(sc);
+            int tournamentId = SafeInput.getInt(sc);
             sc.nextLine();
 
             System.out.print("Enter Organizer ID to assign: ");
-            int organizerId = InputUtil.chooseInt(sc);
+            int organizerId =SafeInput.getInt(sc);
               sc.nextLine();
             checkOrganizer(organizerId);
           

@@ -8,8 +8,7 @@ import java.time.LocalTime;
 import java.util.Scanner;
 import util.Databaseconnection;
 
-import util.InputUtil;
-import util.SafeInput;
+ import util.SafeInput;
 
 public class PracticeSessionManager {
     static int team_id;
@@ -231,7 +230,7 @@ public class PracticeSessionManager {
                 System.out.println("[1]. Try Again");
                 System.out.println("[2]. exit");
                 System.out.println("choose an option :");
-                int choice = InputUtil.chooseInt(sc);
+                int choice = SafeInput.getInt(sc);
                 sc.nextLine();
                 switch (choice) {
                     case 1: {

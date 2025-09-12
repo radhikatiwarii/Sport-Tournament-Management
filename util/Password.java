@@ -1,41 +1,10 @@
 package util;
-import java.util.Base64;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
+ 
 import java.util.Scanner;
 
 public class Password {
 
-    private static final String ALGORITHM = "AES";
-    private static final String SECRET_KEY = generateSecretKey(); // Dynamic secret key
-
-    
-    private static String generateSecretKey() {
-        return "SportTournament1";  
-    }
-
-    
-
-    // AES Encrypt
-    public static String encrypt(String data, String secretKey) throws Exception {
-        SecretKeySpec key = new SecretKeySpec(secretKey.getBytes(), ALGORITHM);
-        Cipher cipher = Cipher.getInstance(ALGORITHM);
-        cipher.init(Cipher.ENCRYPT_MODE, key);
-        byte[] encrypted = cipher.doFinal(data.getBytes());
-        return Base64.getEncoder().encodeToString(encrypted);
-    }
-
-    // AES Decrypt (agar future me use karna ho)
-    public static String decrypt(String encryptedData, String secretKey) throws Exception {
-        SecretKeySpec key = new SecretKeySpec(secretKey.getBytes(), ALGORITHM);
-        Cipher cipher = Cipher.getInstance(ALGORITHM);
-        cipher.init(Cipher.DECRYPT_MODE, key);
-        byte[] decoded = Base64.getDecoder().decode(encryptedData);
-        byte[] decrypted = cipher.doFinal(decoded);
-        return new String(decrypted);
-    }
-
-    public String getPassword(Scanner sc) {
+        public String getPassword(Scanner sc) {
         UniversalInput.pushStep(() -> getPassword(sc));
         while (true) {
             int attempt = 0;
@@ -55,13 +24,8 @@ public class Password {
                         continue;
                     }
                     if (input.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])[A-Za-z\\d@#$%^&+=!]{8,}$")) {
-                        // Encrypt password here before storing
-                       String password =encrypt(input, SECRET_KEY);
-
-                        System.out.println("Your password has been encrypted and stored securely.");
-                        // If you want to verify, you can print decrypted:
-                        // System.out.println("Decrypted password: " + decrypt(password, SECRET_KEY));
-                        return password;
+                       String password =input;
+                       return password;
                     } else {
                         System.out.println("____________________________________________________________________");
                         System.out.println("Invalid Password! Please enter a valid password!");

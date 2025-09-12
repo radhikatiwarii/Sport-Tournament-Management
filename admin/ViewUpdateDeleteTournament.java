@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import util.Databaseconnection;
-import util.InputUtil;
+ 
 import util.SafeInput;
 
 import java.sql.Connection;
@@ -29,8 +29,7 @@ public class ViewUpdateDeleteTournament {
                 System.out.println("|3. View Tournament                       |");
                 System.out.println("|4. Back                                  |");
                 System.out.println("+-----------------------------------------+");
-                int choose = InputUtil.chooseInt(sc);
-
+                int choose = SafeInput.getInt(sc);
                 switch (choose) {
                     case 1: {
                         ViewUpdateDeleteTournament vt = new ViewUpdateDeleteTournament();
@@ -100,7 +99,7 @@ public class ViewUpdateDeleteTournament {
     void deleteTournament() {
         try (Connection con = Databaseconnection.getConnection()) {
             System.out.println("enter the id of the tournament you want to delete !");
-            int tournament_id = InputUtil.chooseInt(sc);
+            int tournament_id =SafeInput.getInt(sc);
             sc.nextLine();
 
             String query = "delete from tournaments where tournament_id =?";

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Scanner;
 import util.Databaseconnection;
-import util.InputUtil;
+ 
 import util.Validation;
 import util.Password;
 import util.SafeInput;
@@ -34,7 +34,7 @@ public class PlayerRegistration {
                 System.out.println("-----------------------------");
 
                 System.out.println("choose an option :");
-                int choice = InputUtil.chooseInt(sc);
+                int choice = SafeInput.getInt(sc);
                 sc.nextLine();
                 switch (choice) {
                     case 1: {
@@ -203,9 +203,6 @@ public class PlayerRegistration {
         if ("BACK_COMMAND".equals(password)) {
             getEmail();
             return;
-        }
-        if (password != null) {
-            System.out.println("Encrypted Password: " + password);
         }
         getRole();
     }

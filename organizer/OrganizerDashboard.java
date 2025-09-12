@@ -1,6 +1,7 @@
 package organizer;
+ 
+import util.SafeInput;
 
-import util.InputUtil;
 import java.util.Scanner;
 
 public class OrganizerDashboard {
@@ -17,7 +18,7 @@ public class OrganizerDashboard {
             System.out.println(" 3. Back");
             System.out.println("--------------------------------------------");
             System.out.println("--------------------------------------------");
-            int choice = InputUtil.chooseInt(sc);
+            int choice =SafeInput.getInt(sc);
             sc.nextLine();
 
             try {
@@ -75,7 +76,7 @@ public class OrganizerDashboard {
             System.out.print("Choose an Option: ");
 
             try {
-                int choice = InputUtil.chooseInt(sc);
+                int choice = SafeInput.getInt(sc);
                 sc.nextLine();
 
                 switch (choice) {

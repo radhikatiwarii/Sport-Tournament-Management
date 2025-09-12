@@ -8,8 +8,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.sql.Timestamp;
 import util.SafeInput;
-import util.InputUtil;
-
+ 
 class StrategyMacking {
     Scanner sc = new Scanner(System.in);
     static String Title;
@@ -147,7 +146,7 @@ class StrategyMacking {
             System.out.println("2. View Strategies");
             System.out.println("3. Exit");
             System.out.print("Choose option: ");
-            int choice = InputUtil.chooseInt(sc);
+            int choice = SafeInput.getInt(sc);
             sc.nextLine();
 
             switch (choice) {
@@ -180,7 +179,7 @@ class StrategyMacking {
                 System.out.println("[1]. Try Again");
                 System.out.println("[2]. exit");
                 System.out.println("choose an option :");
-                int choice = InputUtil.chooseInt(sc);
+                int choice = SafeInput.getInt(sc);
                 sc.nextLine();
                 switch (choice) {
                     case 1: {

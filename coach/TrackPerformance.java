@@ -5,16 +5,35 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
 import util.Databaseconnection;
-import util.InputUtil;
 import util.SafeInput;
+import util.SessionManager;
 
 public class TrackPerformance {
     Scanner sc = new Scanner(System.in);
+
+    private boolean isPlayerAssignedToCoach(int playerId) {
+        try (Connection con = Databaseconnection.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                "SELECT 1 FROM players WHERE Player_id = ? AND coach_id = ?");
+            ps.setInt(1, playerId);
+            ps.setInt(2, SessionManager.getCoach_id());
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            System.out.println("Error checking player assignment: " + e.getMessage());
+            return false;
+        }
+    }
 
     public void recordPerformance() {
         try {
             System.out.print("Enter player ID: ");
             int playerId = Integer.parseInt(SafeInput.getLine(sc).trim());
+
+            if (!isPlayerAssignedToCoach(playerId)) {
+                System.out.println("Ye player aapko assign nahi hai. Aap iski performance track nahi kar sakte.");
+                return;
+            }
 
             System.out.print("Enter match ID: ");
             int matchId = Integer.parseInt(SafeInput.getLine(sc).trim());
@@ -50,6 +69,11 @@ public class TrackPerformance {
             System.out.print("Enter player ID to view performance: ");
             int playerId = Integer.parseInt(SafeInput.getLine(sc).trim());
 
+            if (!isPlayerAssignedToCoach(playerId)) {
+                System.out.println("Ye player aapko assign nahi hai. Aap iski performance track nahi kar sakte.");
+                return;
+            }
+
             Connection con = Databaseconnection.getConnection();
             PreparedStatement ps = con.prepareStatement(
                     "SELECT * FROM  performance WHERE player_id = ?");
@@ -81,7 +105,7 @@ public class TrackPerformance {
             System.out.println("3. Back");
             System.out.println("----------------------------------------------------");
             System.out.println("----------------------------------------------------");
-            int Choose = InputUtil.chooseInt(sc);
+            int Choose = SafeInput.getInt(sc);
             sc.nextLine();
             switch (Choose) {
                 case 1: {
@@ -104,9 +128,5 @@ public class TrackPerformance {
                 }
             }
         }
-    }
-    public static void main(String[] args) {
-        TrackPerformance tf=new TrackPerformance();
-        tf.performance();
     }
 }

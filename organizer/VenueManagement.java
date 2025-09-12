@@ -8,8 +8,7 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 import util.Databaseconnection;
-import util.InputUtil;
-import util.SafeInput;
+ import util.SafeInput;
 
 public class VenueManagement {
     static String available_dates;
@@ -33,7 +32,7 @@ public class VenueManagement {
             System.out.println("--------------------------------------------");
             System.out.println("--------------------------------------------");
 
-            int choose = InputUtil.chooseInt(sc);
+            int choose = SafeInput.getInt(sc);
             sc.nextLine();
             switch (choose) {
                 case 1: {
@@ -251,7 +250,7 @@ public class VenueManagement {
                 System.out.println("[1]. Try Again");
                 System.out.println("[2]. exit");
                 System.out.println("choose an option :");
-                int choice =InputUtil.chooseInt(sc);
+                int choice =SafeInput.getInt(sc);
                 sc.nextLine();
                 switch (choice) {
                     case 1: {

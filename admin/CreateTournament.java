@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.sql.Date;
 import util.Databaseconnection;
-import util.InputUtil;
+ 
 import util.SafeInput;
 
 public class CreateTournament {
@@ -368,7 +368,7 @@ public class CreateTournament {
                 System.out.println("-----------------------------");
 
                 System.out.println("choose an option :");
-                int choice = InputUtil.chooseInt(sc);
+                int choice =SafeInput.getInt(sc);
                 sc.nextLine();
                 switch (choice) {
                     case 1: {

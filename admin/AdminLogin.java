@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 
 import util.Databaseconnection;
-import util.SafeInput;
 import util.UniversalInput;
 
 public class AdminLogin {

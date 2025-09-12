@@ -7,14 +7,14 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 import util.Databaseconnection;
-import util.InputUtil;
-
+import util.SafeInput;
+ 
 public class ViewPlayers {
         Scanner sc = new Scanner(System.in);
 
         void viewPlayers() {
                 System.out.print("Enter Tournament ID: ");
-                int tournamentId = InputUtil.chooseInt(sc);
+                int tournamentId = SafeInput.getInt(sc);
                 sc.nextLine();
 
                 if (!isValidTournamentId(tournamentId)) {

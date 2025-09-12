@@ -1,8 +1,7 @@
 package organizer;
 
 import util.Databaseconnection;
-import util.InputUtil;
-import util.SafeInput;
+ import util.SafeInput;
 import util.SessionManager;
 import util.OrganizerTournamentValidator;
 
@@ -53,10 +52,10 @@ public class MatchSchedule {
 
         try (Connection con = Databaseconnection.getConnection()) {
             System.out.print("Enter Team 1 ID: ");
-            int team1Id = InputUtil.chooseInt(sc);
+            int team1Id = SafeInput.getInt(sc);
 
             System.out.print("Enter Team 2 ID: ");
-            int team2Id = InputUtil.chooseInt(sc);
+            int team2Id = SafeInput.getInt(sc);
 
             if (team1Id == team2Id) {
                 System.out.println(" Team 1 and Team 2 cannot be the same.");
@@ -145,7 +144,7 @@ public class MatchSchedule {
 
     void getTournament() {
         System.out.print("Enter Tournament ID: ");
-        int tournamentId = InputUtil.chooseInt(sc);
+        int tournamentId = SafeInput.getInt(sc);
         try (Connection con = Databaseconnection.getConnection()) {
 
             if (!isValidTournament(con, tournamentId)) {
@@ -178,7 +177,7 @@ public class MatchSchedule {
                 System.out.println("[1]. Try Again");
                 System.out.println("[2]. exit");
                 System.out.println("choose an option :");
-                int choice = InputUtil.chooseInt(sc);
+                int choice = SafeInput.getInt(sc);
                 sc.nextLine();
                 switch (choice) {
                     case 1: {

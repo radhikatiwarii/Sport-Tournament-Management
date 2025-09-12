@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 import util.Databaseconnection;
-import util.InputUtil;
+ 
 import util.SafeInput;
 
 public class GiveFeedback {
@@ -15,7 +15,7 @@ public class GiveFeedback {
 
         
         System.out.print("Enter Match ID: ");
-        int match_id =InputUtil.chooseInt(sc);
+        int match_id =SafeInput.getInt(sc);
         sc.nextLine(); 
        
         System.out.print("Enter your feedback (max 255 characters): ");

@@ -2,8 +2,8 @@ package admin;
 
 import java.util.Scanner;
 import main.HomePage;
-import util.InputUtil;
 import util.NavigationHelper;
+import util.SafeInput;
 import util.GlobalInputHandler;
 
 public class AdminDashboard {
@@ -16,31 +16,24 @@ public class AdminDashboard {
             System.out.println("--------------------------------------------");
             System.err.println("--------------------------------------------");
             System.err.println(" Choose an option :");
-            System.err.println(" 1. Register");
-            System.err.println(" 2. Login");
-            System.err.println(" 3. Back");
+            System.err.println(" 1. Login");
+            System.err.println(" 2. Back");
             System.out.println("--------------------------------------------");
             System.out.println("--------------------------------------------");
-            int choice = InputUtil.chooseInt(sc);
+            int choice = SafeInput.getInt(sc);
             sc.nextLine();
 
             try {
                 switch (choice) {
+                    
                     case 1: {
-                        System.err.println("Register Here!");
-                        AdminRegistration ar = new AdminRegistration();
-                        ar.getFullName();
-                        return;
-                    }
-                    case 2: {
                         System.out.println("Login");
                         AdminLogin al = new AdminLogin();
                         al.Login();
-                        // Only show implementation dashboard if login was successful
-                        // Login method should handle its own flow
+                      
                         break;
                     }
-                    case 3: {
+                    case 2: {
                         System.out.println("Back");
                         System.out.println("_______________________________________________________________________");
                         return;
@@ -73,7 +66,7 @@ public class AdminDashboard {
                 System.err.println("|2. View Coach Assigned to Player                          |");
                 System.out.println("|3. Create Tournament                                      |");
                 System.out.println("|4. Assign Organizer to Tournament                         |");
-                System.out.println("|5. Delete/Update Tournament                               |");
+                System.out.println("|5. Manage Tournament                               |");
                 System.err.println("|6. View Feedback                                          |");
                 System.out.println("|7. Generate Report                                        |");
                 System.err.println("|0. Logout                                                 |");
