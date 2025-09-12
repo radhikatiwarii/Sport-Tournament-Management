@@ -43,7 +43,8 @@ public class PlayerLogin {
     int attempt = 3;
     while (attempt > 0) {
       String email = UniversalInput.getInputTrim(sc, "Enter your email id: ");
-      if (email == null) return; // Back pressed
+      if (email == null)
+        return; // Back pressed
       System.out.println("___________________________________________________________");
 
       String password = UniversalInput.getInputTrim(sc, "Password: ");
@@ -60,7 +61,25 @@ public class PlayerLogin {
         System.out.println("Login Succesfull Welcome , " + email);
         System.out.println("Your User ID is: " + user_id);
         System.out.println("___________________________________________________________");
-        
+        try (Connection con=Databaseconnection.getConnection()) {
+           PreparedStatement ps2 = con.prepareStatement("SELECT player_id FROM players WHERE user_id = ?");
+        ps2.setInt(1, user_id);
+        ResultSet rs2 = ps2.executeQuery();
+
+        int playerId = -1;
+        if (rs2.next()) {
+          playerId = rs2.getInt("player_id");
+          SessionManager.setPlayer_Id(playerId); // ✅ Set session here
+          System.out.println("Login successful. Player ID: " + playerId);
+        } else {
+          System.out.println("No player profile found for this user.");
+          return;
+        }
+
+        } catch (Exception e) {
+         e.printStackTrace();
+        }
+       
         // Show implementation dashboard after successful login
         PlayerDashboard pd = new PlayerDashboard();
         pd.showImplementationDashboard(sc);

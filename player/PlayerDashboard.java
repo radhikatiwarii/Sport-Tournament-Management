@@ -1,14 +1,15 @@
 package player;
 
- 
 import util.SafeInput;
 import util.SessionManager;
+import util.NavigationHelper;
 
 import java.util.Scanner;
 
 public class PlayerDashboard {
 
     public void showDashboard(Scanner sc) {
+        NavigationHelper.pushPage(() -> showDashboard(sc));
         System.out.println("Welcome to Player Dashboard!");
         int attempt = 3;
         while (attempt > 0) {
@@ -20,7 +21,7 @@ public class PlayerDashboard {
             System.out.println(" 3. Back");
             System.out.println("--------------------------------------------");
             System.out.println("--------------------------------------------");
-            int choice =     SafeInput.getInt(sc);
+            int choice = SafeInput.getInt(sc);
             sc.nextLine();
 
             try {
@@ -28,18 +29,18 @@ public class PlayerDashboard {
                     case 1: {
                         System.out.println("Register Here!");
                         PlayerRegistration pr = new PlayerRegistration();
-                         pr.getFullName();
+                        pr.getFullName();
                         return;
                     }
                     case 2: {
                         System.out.println("Login");
                         PlayerLogin pl = new PlayerLogin();
                         pl.Login();
-                       
+
                         break;
                     }
                     case 3: {
-                        System.out.println("Back");
+                        NavigationHelper.goBack();
                         return;
                     }
                     default: {
@@ -58,6 +59,7 @@ public class PlayerDashboard {
     }
 
     void showImplementationDashboard(Scanner sc) {
+        NavigationHelper.pushPage(() -> showImplementationDashboard(sc));
         System.out.println("+-------------------------------------------------------+");
         System.out.println("|                  player Menu           !              |");
         while (true) {
@@ -76,7 +78,7 @@ public class PlayerDashboard {
             System.out.println("+-------------------------------------------------------+");
 
             System.out.println("Choose an option What you Want :");
-            int choice =  SafeInput.getInt(sc);
+            int choice = SafeInput.getInt(sc);
 
             sc.nextLine();
 
@@ -85,16 +87,28 @@ public class PlayerDashboard {
                     EventRegistration er = new EventRegistration();
                     er.viewTournamentDetails();
                     System.out.print("Enter Tournament ID: ");
-                    int tournamentId = sc.nextInt();
+                    int tournamentId = SafeInput.getInt(sc);
+                    if (tournamentId == -1)
+                        return;
                     System.out.println("___________________________________________");
                     er.registerPlayer(tournamentId);
                     break;
                 }
-                
+
                 case 2: {
                     System.out.println("Enter Player_id");
-                    int player_id = sc.nextInt();
-                    sc.nextLine();
+                    int player_id = SafeInput.getInt(sc);
+                    if (player_id == -1)
+                        return;
+                    int loggedInPlayerId = SessionManager.getPlayer_Id();
+                    System.out.println("DEBUG: Entered Player ID = " + player_id);
+                  System.out.println("DEBUG: Logged-in Player ID = " + loggedInPlayerId);
+
+
+                    if (player_id != loggedInPlayerId) {
+                        System.out.println("You cannot assign coach to other. Please enter your own Player ID.");
+                        break;
+                    }
                     CoachAssignToPlayer cap = new CoachAssignToPlayer();
                     cap.assignCoachToPlayer(player_id);
                     break;
@@ -112,7 +126,9 @@ public class PlayerDashboard {
 
                 case 5: {
                     System.out.print("Enter Tournament ID: ");
-                    int tournamentId = sc.nextInt();
+                    int tournamentId = SafeInput.getInt(sc);
+                    if (tournamentId == -1)
+                        return;
                     System.out.println("___________________________________________");
 
                     OpeningClosingDate ocd = new OpeningClosingDate();
@@ -128,7 +144,9 @@ public class PlayerDashboard {
                 case 6: {
                     try {
                         System.out.println("Enter your Player ID:");
-                        int playerId = sc.nextInt();
+                        int playerId = SafeInput.getInt(sc);
+                        if (playerId == -1)
+                            return;
                         System.out.println("___________________________________________");
                         System.out.println("");
                         CheckPlayerBalance cpb = new CheckPlayerBalance();
@@ -139,7 +157,9 @@ public class PlayerDashboard {
                             System.out.println("2. Add Amount");
                             System.out.println("3. Back");
                             System.out.println("--------------------------------");
-                            int choose = sc.nextInt();
+                            int choose = SafeInput.getInt(sc);
+                            if (choose == -1)
+                                return;
 
                             if (choose == 1) {
                                 cpb.checkBalance(playerId);
@@ -166,7 +186,9 @@ public class PlayerDashboard {
                     System.out.println("Select tournament_id from the Tournaments table given below:");
                     jt.showAvailableTournaments();
                     System.out.println("Enter tournament Id");
-                    int tournamentId = sc.nextInt();
+                    int tournamentId = SafeInput.getInt(sc);
+                    if (tournamentId == -1)
+                        return;
                     System.out.println("___________________________________________");
                     jt.joinTeam(player_id, tournamentId);
                     break;
@@ -175,12 +197,22 @@ public class PlayerDashboard {
                 case 8: {
                     TeamDetails td = new TeamDetails();
                     System.out.print("Enter your Player ID: ");
-                    int playerId = sc.nextInt();
+                    int playerId = SafeInput.getInt(sc);
+                    if (playerId == -1)
+                        return;
+                         int loggedInPlayerId = SessionManager.getPlayer_Id();
+                    System.out.println("DEBUG: Entered Player ID = " + playerId);
+                  System.out.println("DEBUG: Logged-in Player ID = " + loggedInPlayerId);
+
+                    if (playerId != loggedInPlayerId) {
+                        System.out.println("You cannot see other's Team Details. Please enter your own Player ID.");
+                        break;
+                    }
                     System.out.println("___________________________________________");
                     td.showTeamDetails(playerId);
                     break;
                 }
-              
+
                 case 9: {
                     ViewMatchResult vmr = new ViewMatchResult();
                     vmr.viewResults();
@@ -190,15 +222,24 @@ public class PlayerDashboard {
                 case 10: {
                     GiveFeedback feedbackObj = new GiveFeedback();
                     System.out.print("Enter your Player ID: ");
-                    int player_id = sc.nextInt();
+                    int player_id = SafeInput.getInt(sc);
+                    if (player_id == -1)
+                        return;
+                               int loggedInPlayerId = SessionManager.getPlayer_Id();
+                    System.out.println("DEBUG: Entered Player ID = " + player_id);
+                  System.out.println("DEBUG: Logged-in Player ID = " + loggedInPlayerId);
+
+                    if (player_id != loggedInPlayerId) {
+                        System.out.println("You cannot give feedback on others behalf. Please enter your own Player ID.");
+                        break;
+                    }
                     System.out.println("___________________________________________");
 
                     feedbackObj.submitFeedback(player_id);
                     break;
                 }
                 case 11: {
-                    System.out.println("Back");
-                    System.out.println("___________________________________________");
+                    NavigationHelper.goBack();
                     return;
                 }
                 default: {

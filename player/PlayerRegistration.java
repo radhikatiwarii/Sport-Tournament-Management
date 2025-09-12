@@ -35,6 +35,7 @@ public class PlayerRegistration {
 
                 System.out.println("choose an option :");
                 int choice = SafeInput.getInt(sc);
+                if (choice == -1) return;
                 sc.nextLine();
                 switch (choice) {
                     case 1: {
@@ -262,8 +263,6 @@ public class PlayerRegistration {
 
             if (choose > 0) {
                 System.out.println("Registration Succesfull !");
-                PlayerDashboard pd = new PlayerDashboard();
-                pd.showDashboard(sc);
                 return;
 
             } else {

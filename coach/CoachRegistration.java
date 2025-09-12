@@ -70,8 +70,7 @@ public class CoachRegistration {
                         return;
                     }
                     if (input.equalsIgnoreCase("back")) {
-                        CoachDashboard c = new CoachDashboard();
-                        c.showDashboard(sc);
+                        return;
                     }
                     if (input.isEmpty()) {
                         System.out.println("username cannot be empty, Please enter a valid name:");
@@ -112,6 +111,7 @@ public class CoachRegistration {
                     }
                     if (input.equalsIgnoreCase("back")) {
                         getFullName();
+                        return;
                     }
 
                     if (input.isEmpty()) {
@@ -150,6 +150,7 @@ public class CoachRegistration {
                     }
                     if (input.equalsIgnoreCase("back")) {
                         getPhoneNo();
+                        return;
                     }
 
                     if (input.isEmpty()) {
@@ -220,6 +221,7 @@ public class CoachRegistration {
                     }
                     if (inputRole.equalsIgnoreCase("back")) {
                         getPassword();
+                        return;
                     }
                     if (inputRole.isEmpty()) {
                         System.out.println("Role cannot be empty, Please enter your Role:");

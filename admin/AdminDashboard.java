@@ -1,6 +1,6 @@
 package admin;
 
-import java.util.Scanner;
+ import java.util.Scanner;
 import main.HomePage;
 import util.NavigationHelper;
 import util.SafeInput;
@@ -25,17 +25,16 @@ public class AdminDashboard {
 
             try {
                 switch (choice) {
-                    
+
                     case 1: {
                         System.out.println("Login");
                         AdminLogin al = new AdminLogin();
                         al.Login();
-                      
+
                         break;
                     }
                     case 2: {
-                        System.out.println("Back");
-                        System.out.println("_______________________________________________________________________");
+                        NavigationHelper.goBack();
                         return;
                     }
                     default: {
@@ -66,7 +65,7 @@ public class AdminDashboard {
                 System.err.println("|2. View Coach Assigned to Player                          |");
                 System.out.println("|3. Create Tournament                                      |");
                 System.out.println("|4. Assign Organizer to Tournament                         |");
-                System.out.println("|5. Manage Tournament                               |");
+                System.out.println("|5. Manage Tournament                                      |");
                 System.err.println("|6. View Feedback                                          |");
                 System.out.println("|7. Generate Report                                        |");
                 System.err.println("|0. Logout                                                 |");
@@ -88,11 +87,11 @@ public class AdminDashboard {
                         vp.viewCoachAssignedToPlayer();
                         break;
                     case "3":
-                    CreateTournament ct=new CreateTournament();
-                       ct.getTournamentName();
+                        CreateTournament ct = new CreateTournament();
+                        ct.getTournamentName();
                         break;
                     case "4":
-                    AssignOrganizer ao=new AssignOrganizer();
+                        AssignOrganizer ao = new AssignOrganizer();
                         ao.assignOrganizer();
                         break;
                     case "5":
@@ -104,7 +103,7 @@ public class AdminDashboard {
                         vf.viewFeedback();
                         break;
                     case "7":
-                       GenerateReport g = new GenerateReport();
+                        GenerateReport g = new GenerateReport();
                         g.getTournamentId();
                         break;
 

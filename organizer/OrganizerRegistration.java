@@ -68,9 +68,8 @@ public class OrganizerRegistration {
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
                     }
- if (input.equalsIgnoreCase("back")) {
-                       OrganizerDashboard o=new OrganizerDashboard();
-                       o.showDashboard(sc);
+                    if (input.equalsIgnoreCase("back")) {
+                        return;
                     }
                     if (input.isEmpty()) {
                         System.out.println("username cannot be empty, Please enter a valid name:");
@@ -109,8 +108,9 @@ public class OrganizerRegistration {
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
                     }
-                     if (input.equalsIgnoreCase("back")) {
+                    if (input.equalsIgnoreCase("back")) {
                         getFullName();
+                        return;
                     }
 
                     if (input.isEmpty()) {
@@ -146,8 +146,10 @@ public class OrganizerRegistration {
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
-                    } if (input.equalsIgnoreCase("back")) {
+                    }
+                    if (input.equalsIgnoreCase("back")) {
                         getPhoneNo();
+                        return;
                     }
 
                     if (input.isEmpty()) {
@@ -206,8 +208,9 @@ public class OrganizerRegistration {
                     if (inputRole.equalsIgnoreCase("Exit")) {
                         return;
                     }
-                     if (inputRole.equalsIgnoreCase("back")) {
+                    if (inputRole.equalsIgnoreCase("back")) {
                         getPassword();
+                        return;
                     }
                     if (inputRole.isEmpty()) {
                         System.out.println("Role cannot be empty, Please enter your password:");

@@ -1,12 +1,14 @@
 package organizer;
  
 import util.SafeInput;
+import util.NavigationHelper;
 
 import java.util.Scanner;
 
 public class OrganizerDashboard {
 
     public void showDashboard(Scanner sc) {
+        NavigationHelper.pushPage(() -> showDashboard(sc));
         System.out.println("Welcome to Organizer Dashboard!");
         int attempt = 3;
         while (attempt > 0) {
@@ -38,8 +40,7 @@ public class OrganizerDashboard {
                         break;
                     }
                     case 3: {
-                        System.out.println("Back");
-                        System.out.println("_______________________________________________________________________");
+                        NavigationHelper.goBack();
                         return;
                     }
                     default: {
@@ -58,6 +59,7 @@ public class OrganizerDashboard {
     }
 
     public void showImplementationDashboard(Scanner sc) {
+        NavigationHelper.pushPage(() -> showImplementationDashboard(sc));
         while (true) {
             System.out.println("+-------------------------------------------------------+");
             System.out.println("|                  Organizer Menu                       |");
@@ -77,6 +79,7 @@ public class OrganizerDashboard {
 
             try {
                 int choice = SafeInput.getInt(sc);
+                if (choice == -1) return;
                 sc.nextLine();
 
                 switch (choice) {
@@ -118,7 +121,7 @@ public class OrganizerDashboard {
                         vmr.viewResults();
                         break;
                     case 9:
-                        System.out.println(" Exiting Organizer Menu...");
+                        NavigationHelper.goBack();
                         return;
 
                     default:

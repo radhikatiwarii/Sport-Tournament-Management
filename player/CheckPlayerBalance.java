@@ -21,12 +21,21 @@ public class CheckPlayerBalance {
 
     public void addAmount(int playerId) {
         System.out.println("Enter amount to add:");
-        double amount = sc.nextDouble();
-        PlayerWallet wallet = new PlayerWallet();
-        if (wallet.addMoneyToWallet(playerId, amount)) {
-            System.out.println("₹" + amount + " added to your wallet successfully!");
-        } else {
-            System.out.println("Failed to add money. Try again!");
+        try {
+            double amount = sc.nextDouble();
+            sc.nextLine();
+            PlayerWallet wallet = new PlayerWallet();
+            if (wallet.addMoneyToWallet(playerId, amount)) {
+                System.out.println("₹" + amount + " added to your wallet successfully!");
+            } else {
+                System.out.println("Failed to add money. Try again!");
+            }
+        } catch (java.util.NoSuchElementException e) {
+            System.out.println("Operation cancelled.");
+            return;
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter a valid amount.");
+            sc.nextLine();
         }
     }
 }

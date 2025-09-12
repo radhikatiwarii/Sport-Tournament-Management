@@ -4,6 +4,7 @@ package coach;
 import java.util.Scanner;
 
 import util.SafeInput;
+import util.NavigationHelper;
 
 public class CoachDashboard {
 
@@ -45,8 +46,7 @@ public class CoachDashboard {
 
                     }
                     case 3: {
-                        System.out.println("Back");
-                        System.out.println("_______________________________________________________________________");
+                        NavigationHelper.goBack();
                         return;
                     }
                     default: {
@@ -67,6 +67,7 @@ public class CoachDashboard {
     }
 
     void showImplementationDashboard(Scanner sc, int coachId) {
+        NavigationHelper.pushPage(() -> showImplementationDashboard(sc, coachId));
         while (true) {
             System.out.println("+--------------------------------------------------------+");
             System.out.println("|                     Coach Menu !                       |");
@@ -81,6 +82,7 @@ public class CoachDashboard {
             System.out.println("+--------------------------------------------------------+");
             System.out.println("Choose an option What you Want :");
             int choice = SafeInput.getInt(sc);
+            if (choice == -1) return;
 
             sc.nextLine();
 
@@ -129,8 +131,7 @@ public class CoachDashboard {
                 }
                 
                 case 7: {
-                    System.out.println(" Back !");
-                    System.out.println("__________________________________________");
+                    NavigationHelper.goBack();
                     return;
                 }
                 default: {

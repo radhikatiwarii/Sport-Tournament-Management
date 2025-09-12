@@ -25,12 +25,12 @@ public class CoachAssignToPlayer {
             System.out.println("  Available Coaches:");
             System.out
                     .println(
-                            "+---------------------------------------+");
+                            "+-----------------------------------+");
             System.out.printf("|%-8s| %-15s| %-8s|  \n",
                     "coach_id", "Coach_name", "Fees" );
             System.out
                     .println(
-                            "+---------------------------------------+");
+                            "+-----------------------------------+");
             boolean hasResult = false;
             while (rs.next()) {
                 hasResult = true;
@@ -40,7 +40,7 @@ public class CoachAssignToPlayer {
                 System.out.printf("|%-8d| %-15s| %-8.2f| \n",
                         coach_id, coach_name, fees );
                 System.out.println(
-                        "+---------------------------------------+");
+                        "+-----------------------------------+");
 
             }
             if (!hasResult) {
@@ -49,6 +49,10 @@ public class CoachAssignToPlayer {
 
             System.out.print("  Enter Coach ID you want to assign: ");
             int coachId = SafeInput.getInt(sc);
+            if (coachId == -1) {
+                System.out.println("Operation cancelled.");
+                return;
+            }
 
             PreparedStatement ps = con.prepareStatement("SELECT fees FROM coaches WHERE coach_id = ?");
             ps.setInt(1, coachId);

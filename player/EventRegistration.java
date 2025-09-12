@@ -173,6 +173,7 @@ public class EventRegistration {
                 System.out.println("---------------------------");
                 System.out.println("choose an option :");
                 int choice = SafeInput.getInt(sc);
+                if (choice == -1) return;
                 sc.nextLine();
                 switch (choice) {
                     case 1: {
