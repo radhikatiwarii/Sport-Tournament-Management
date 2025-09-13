@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   Copyright (c) 2006, 2025, Oracle and/or its affiliates.
 
@@ -62,7 +62,7 @@
     <dependency>
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java</artifactId>
-      <version>4.31.1</version>
+      <version>4.32.0</version>
     </dependency>
 
     <dependency>
