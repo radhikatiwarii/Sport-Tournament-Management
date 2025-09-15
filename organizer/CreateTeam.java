@@ -47,30 +47,30 @@ public class CreateTeam {
             System.out.println(" Error while creating team: " + e.getMessage());
         }
     }
-    void createTeam()
-    {
-      System.out.println("Enter Your Organizer Id");
-       int organizer_id = SessionManager.getOrganizerId();
+
+    void createTeam() {
+        System.out.println("Enter Your Organizer Id");
+        int organizer_id = SessionManager.getOrganizerId();
         if (!isValidOrganizerId(organizer_id)) {
             System.out.println("Invalid Organizer ID. Please enter your Organizer ID.");
-        } else{
+        } else {
             getTeamName();
         }
     }
 
     public void getTeamName() {
-        
+
         while (true) {
             int attempt = 0;
             while (attempt < 3) {
                 try {
                     System.out.print("Enter Team Name: ");
                     String input = SafeInput.getLine(sc);
-                    
+
                     if (input == null) {
                         return; // Back was pressed
                     }
-                    
+
                     input = input.trim();
                     System.out.println("_____________________________________");
 
@@ -139,11 +139,11 @@ public class CreateTeam {
                 System.out.println("_______________________________________________");
                 System.out.print("Enter Coach ID: ");
                 String input = SafeInput.getLine(sc);
-                
+
                 if (input == null) {
                     return; // Back was pressed
                 }
-                
+
                 input = input.trim();
                 System.out.println("_____________________________________");
 
@@ -208,11 +208,11 @@ public class CreateTeam {
 
                 System.out.print("Enter Tournament ID: ");
                 String input = SafeInput.getLine(sc);
-                
+
                 if (input == null) {
                     return; // Back was pressed
                 }
-                
+
                 input = input.trim();
                 System.out.println("_____________________________________");
 
@@ -239,11 +239,11 @@ public class CreateTeam {
         while (attempt < 3) {
             System.out.print("Enter Team Status (Active/Inactive/Disqualified): ");
             String input = SafeInput.getLine(sc);
-            
+
             if (input == null) {
                 return; // Back was pressed
             }
-            
+
             input = input.trim();
             System.out.println("_____________________________________");
 
@@ -266,11 +266,11 @@ public class CreateTeam {
         while (attempt < 3) {
             System.out.print("Enter full path to team logo image: ");
             String input = SafeInput.getLine(sc);
-            
+
             if (input == null) {
                 return; // Back was pressed
             }
-            
+
             input = input.trim();
             System.out.println("_____________________________________");
 
@@ -295,11 +295,11 @@ public class CreateTeam {
             try {
                 System.out.print("Enter total championships won: ");
                 String input = SafeInput.getLine(sc);
-                
+
                 if (input == null) {
                     return; // Back was pressed
                 }
-                
+
                 input = input.trim();
                 System.out.println("_____________________________________");
 
@@ -320,13 +320,13 @@ public class CreateTeam {
             }
         }
     }
-    
+
     private void retryLogic(int attempt) {
         System.out.println("You have tried 3 times.");
         System.out.println("1. Try Again");
         System.out.println("2. Exit");
         System.out.print("Choose an option: ");
-        
+
         try {
             String choice = SafeInput.getLine(sc);
             if (choice == null || choice.trim().equals("2")) {
@@ -336,7 +336,8 @@ public class CreateTeam {
             System.out.println("Exiting...");
         }
     }
-     private boolean isValidOrganizerId(int organizer_id) {
+
+    private boolean isValidOrganizerId(int organizer_id) {
 
         try (Connection con = Databaseconnection.getConnection()) {
             String query = "SELECT organizer_id FROM organizers WHERE organizer_id = ?";

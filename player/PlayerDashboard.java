@@ -40,7 +40,7 @@ public class PlayerDashboard {
                         break;
                     }
                     case 3: {
-                         
+
                         return;
                     }
                     default: {
@@ -248,7 +248,7 @@ public class PlayerDashboard {
                     break;
                 }
                 case 11: {
-                    NavigationHelper.goBack();
+                    System.out.println("back");
                     return;
                 }
                 default: {

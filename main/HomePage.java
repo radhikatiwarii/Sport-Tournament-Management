@@ -14,15 +14,16 @@ import organizer.OrganizerDashboard;
 import player.PlayerDashboard;
 
 public class HomePage {
-  
+
     public void autoCloseTournaments() {
-    try (Connection con = Databaseconnection.getConnection()) {
-        String query = "UPDATE tournaments SET status = 'closed' WHERE end_date < CURRENT_DATE AND status = 'open'";
-        PreparedStatement ps = con.prepareStatement(query);
-        int updated = ps.executeUpdate();
-    } catch (Exception e) {
-e.printStackTrace();    }
-}
+        try (Connection con = Databaseconnection.getConnection()) {
+            String query = "UPDATE tournaments SET status = 'closed' WHERE end_date < CURRENT_DATE AND status = 'open'";
+            PreparedStatement ps = con.prepareStatement(query);
+            int updated = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void homepage() {
         Scanner sc = new Scanner(System.in);
@@ -30,8 +31,8 @@ e.printStackTrace();    }
             while (true) {
                 autoCloseTournaments();
                 System.out.println();
-              System.out.println("_________________________________________________________________________");
-               System.out.println("Welcome To The Sport Tournament management System!");
+                System.out.println("_________________________________________________________________________");
+                System.out.println("Welcome To The Sport Tournament management System!");
                 System.out.println("#---Welcome To The Sport Tournament management System!---#");
                 System.out.println();
                 System.out.println("+-----------------------------------+");
@@ -50,7 +51,7 @@ e.printStackTrace();    }
                 System.out.println("+-----------------------------------+");
 
                 System.out.println("Choose an Option!");
-                int choose =SafeInput.getInt(sc);
+                int choose = SafeInput.getInt(sc);
 
                 sc.nextLine();
 

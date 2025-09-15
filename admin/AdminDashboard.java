@@ -54,7 +54,6 @@ public class AdminDashboard {
 
     public void showImplementationDashboard(Scanner sc) {
         NavigationHelper.pushPage(() -> showImplementationDashboard(sc));
-        int attempt[] = { 0 };
         try {
             while (true) {
 

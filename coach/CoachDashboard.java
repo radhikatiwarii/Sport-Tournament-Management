@@ -131,7 +131,7 @@ public class CoachDashboard {
                 }
                 
                 case 7: {
-                    NavigationHelper.goBack();
+                   System.out.println("back");
                     return;
                 }
                 default: {

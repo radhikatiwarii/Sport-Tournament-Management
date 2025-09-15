@@ -1,5 +1,5 @@
 package organizer;
- 
+
 import util.SafeInput;
 import util.NavigationHelper;
 
@@ -20,7 +20,7 @@ public class OrganizerDashboard {
             System.out.println(" 3. Back");
             System.out.println("--------------------------------------------");
             System.out.println("--------------------------------------------");
-            int choice =SafeInput.getInt(sc);
+            int choice = SafeInput.getInt(sc);
             sc.nextLine();
 
             try {
@@ -40,7 +40,7 @@ public class OrganizerDashboard {
                         break;
                     }
                     case 3: {
-                        
+
                         return;
                     }
                     default: {
@@ -79,7 +79,8 @@ public class OrganizerDashboard {
 
             try {
                 int choice = SafeInput.getInt(sc);
-                if (choice == -1) return;
+                if (choice == -1)
+                    return;
                 sc.nextLine();
 
                 switch (choice) {
@@ -121,7 +122,8 @@ public class OrganizerDashboard {
                         vmr.viewResults();
                         break;
                     case 9:
-                        NavigationHelper.goBack();
+                        System.out.println("Exiting....");
+
                         return;
 
                     default:
