@@ -2,6 +2,7 @@ package organizer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 import util.Databaseconnection;
@@ -158,21 +159,39 @@ public class OrganizerRegistration {
                     }
 
                     if (input.matches("^[a-z]+[a-z]\\.[a-z]+[0-9]{4}@ssism\\.org$")) {
-                        email = input;
-                        getPassword();
-                        return;
+                        if (isEmailAlreadyPresent(input)) {
+                            System.out.println("This Email is already present ,Please Enter Another Email !");
+                            attempt++;
+                            continue;
+                        } else {
+                            email = input;
+                            getPassword();
+                            return;
+                        }
                     }
 
                     if (input.matches("^[a-z]+[a-z]+\\d+@gmail\\.com$")) {
-                        email = input;
-                        getPassword();
-                        return;
+                        if (isEmailAlreadyPresent(input)) {
+                            System.out.println("This Email is already present ,Please Enter Another Email !");
+                            attempt++;
+                            continue;
+                        } else {
+                            email = input;
+                            getPassword();
+                            return;
+                        }
                     }
 
                     if (input.matches("^[a-z]+[a-z]+\\d+@yahoo\\.com$")) {
-                        email = input;
-                        getPassword();
-                        return;
+                        if (isEmailAlreadyPresent(input)) {
+                            System.out.println("This Email is already present ,Please Enter Another Email !");
+                            attempt++;
+                            continue;
+                        } else {
+                            email = input;
+                            getPassword();
+                            return;
+                        }
                     }
 
                     else {
@@ -264,5 +283,20 @@ public class OrganizerRegistration {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }private boolean isEmailAlreadyPresent(String email) {
+        try (Connection con = Databaseconnection.getConnection()) {
+            String query = "SELECT COUNT(*) FROM users WHERE email = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

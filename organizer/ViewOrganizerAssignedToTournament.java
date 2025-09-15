@@ -6,14 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import util.Databaseconnection;
-import util.SafeInput;
+import util.SessionManager;
 
 public class ViewOrganizerAssignedToTournament {
     Scanner sc = new Scanner(System.in);
 
     void viewOrganizerAssignedToTournament() {
         System.out.println("Enter Your Organizer Id");
-        int organizer_id = SafeInput.getInt(sc);
+       int organizer_id = SessionManager.getOrganizerId();
         if (!isValidOrganizerId(organizer_id)) {
             System.out.println("Invalid Organizer ID. Please enter a valid Organizer ID.");
         } else {

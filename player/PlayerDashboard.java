@@ -40,7 +40,7 @@ public class PlayerDashboard {
                         break;
                     }
                     case 3: {
-                        NavigationHelper.goBack();
+                         
                         return;
                     }
                     default: {
@@ -102,8 +102,7 @@ public class PlayerDashboard {
                         return;
                     int loggedInPlayerId = SessionManager.getPlayer_Id();
                     System.out.println("DEBUG: Entered Player ID = " + player_id);
-                  System.out.println("DEBUG: Logged-in Player ID = " + loggedInPlayerId);
-
+                    System.out.println("DEBUG: Logged-in Player ID = " + loggedInPlayerId);
 
                     if (player_id != loggedInPlayerId) {
                         System.out.println("You cannot assign coach to other. Please enter your own Player ID.");
@@ -147,6 +146,15 @@ public class PlayerDashboard {
                         int playerId = SafeInput.getInt(sc);
                         if (playerId == -1)
                             return;
+                        int loggedInPlayerId = SessionManager.getPlayer_Id();
+                        System.out.println("DEBUG: Entered Player ID = " + playerId);
+                        System.out.println("DEBUG: Logged-in Player ID = " + loggedInPlayerId);
+
+                        if (playerId != loggedInPlayerId) {
+                            System.out.println(
+                                    "You cannot see other Player's Wallet Details. Please enter your own Player ID.");
+                            break;
+                        }
                         System.out.println("___________________________________________");
                         System.out.println("");
                         CheckPlayerBalance cpb = new CheckPlayerBalance();
@@ -200,9 +208,9 @@ public class PlayerDashboard {
                     int playerId = SafeInput.getInt(sc);
                     if (playerId == -1)
                         return;
-                         int loggedInPlayerId = SessionManager.getPlayer_Id();
+                    int loggedInPlayerId = SessionManager.getPlayer_Id();
                     System.out.println("DEBUG: Entered Player ID = " + playerId);
-                  System.out.println("DEBUG: Logged-in Player ID = " + loggedInPlayerId);
+                    System.out.println("DEBUG: Logged-in Player ID = " + loggedInPlayerId);
 
                     if (playerId != loggedInPlayerId) {
                         System.out.println("You cannot see other's Team Details. Please enter your own Player ID.");
@@ -225,12 +233,13 @@ public class PlayerDashboard {
                     int player_id = SafeInput.getInt(sc);
                     if (player_id == -1)
                         return;
-                               int loggedInPlayerId = SessionManager.getPlayer_Id();
+                    int loggedInPlayerId = SessionManager.getPlayer_Id();
                     System.out.println("DEBUG: Entered Player ID = " + player_id);
-                  System.out.println("DEBUG: Logged-in Player ID = " + loggedInPlayerId);
+                    System.out.println("DEBUG: Logged-in Player ID = " + loggedInPlayerId);
 
                     if (player_id != loggedInPlayerId) {
-                        System.out.println("You cannot give feedback on others behalf. Please enter your own Player ID.");
+                        System.out
+                                .println("You cannot give feedback on others behalf. Please enter your own Player ID.");
                         break;
                     }
                     System.out.println("___________________________________________");
@@ -250,5 +259,4 @@ public class PlayerDashboard {
             }
         }
     }
-
 }

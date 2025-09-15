@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Scanner;
 import util.Databaseconnection;
- 
+
 import util.Validation;
 import util.Password;
 import util.SafeInput;
 import util.UniversalInput;
+import java.sql.ResultSet;
 
 public class PlayerRegistration {
     static int user_id;
@@ -35,7 +36,8 @@ public class PlayerRegistration {
 
                 System.out.println("choose an option :");
                 int choice = SafeInput.getInt(sc);
-                if (choice == -1) return;
+                if (choice == -1)
+                    return;
                 sc.nextLine();
                 switch (choice) {
                     case 1: {
@@ -69,13 +71,13 @@ public class PlayerRegistration {
             while (attempt < 3) {
                 try {
                     String input = UniversalInput.getInputTrim(sc, "Enter your full name: ");
-                    if (input == null) return; // Back pressed
+                    if (input == null)
+                        return; // Back pressed
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
                     }
 
-                    
                     if (input.isEmpty()) {
                         System.out.println("username cannot be empty, Please enter a valid name:");
                         attempt++;
@@ -112,13 +114,14 @@ public class PlayerRegistration {
             while (attempt < 3) {
                 try {
                     String input = UniversalInput.getInputTrim(sc, "Enter your Mobile no.: ");
-                    if (input == null) return; // Back pressed
+                    if (input == null)
+                        return; // Back pressed
                     System.out.println("_____________________________________");
 
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
                     }
-                  
+
                     if (input.isEmpty()) {
                         System.out.println("Mobile No. cannot be empty, Please enter a valid number:");
                         attempt++;
@@ -149,33 +152,52 @@ public class PlayerRegistration {
             while (attempt < 3) {
                 try {
                     String input = UniversalInput.getInputTrim(sc, "Enter your Email_Id: ");
-                    if (input == null) return; // Back pressed
+                    if (input == null)
+                        return; // Back pressed
                     System.out.println("_____________________________________");
                     if (input.equalsIgnoreCase("Exit")) {
                         return;
                     }
-                   
+
                     if (input.isEmpty()) {
                         System.out.println("Email cannot be empty, Please enter a valid Email:");
                         attempt++;
                     }
 
                     if (input.matches("^[a-z]+[a-z]\\.[a-z]+[0-9]{4}@ssism\\.org$")) {
-                        email = input;
-                        getPassword();
-                        return;
+                        if (isEmailAlreadyPresent(input)) {
+                            System.out.println("This Email is already present ,Please Enter Another Email !");
+                            attempt++;
+                            continue;
+                        } else {
+                            email = input;
+                            getPassword();
+                            return;
+                        }
                     }
 
                     if (input.matches("^[a-z]+[a-z]+\\d+@gmail\\.com$")) {
-                        email = input;
-                        getPassword();
-                        return;
+                        if (isEmailAlreadyPresent(input)) {
+                            System.out.println("This Email is already present ,Please Enter Another Email !");
+                            attempt++;
+                            continue;
+                        } else {
+                            email = input;
+                            getPassword();
+                            return;
+                        }
                     }
 
                     if (input.matches("^[a-z]+[a-z]+\\d+@yahoo\\.com$")) {
-                        email = input;
-                        getPassword();
-                        return;
+                        if (isEmailAlreadyPresent(input)) {
+                            System.out.println("This Email is already present ,Please Enter Another Email !");
+                            attempt++;
+                            continue;
+                        } else {
+                            email = input;
+                            getPassword();
+                            return;
+                        }
                     }
 
                     else {
@@ -197,7 +219,7 @@ public class PlayerRegistration {
         UniversalInput.pushStep(() -> getPassword());
         Password passwordUtil = new Password();
         password = passwordUtil.getPassword(sc);
-        
+
         if (password == null) {
             return;
         }
@@ -214,13 +236,15 @@ public class PlayerRegistration {
             while (attempt < 3) {
 
                 try {
-                    String inputRole = UniversalInput.getInputTrim(sc, "Please specify your role (player, coach, admin, organizer): ");
-                    if (inputRole == null) return; // Back pressed
+                    String inputRole = UniversalInput.getInputTrim(sc,
+                            "Please specify your role (player, coach, admin, organizer): ");
+                    if (inputRole == null)
+                        return; // Back pressed
                     System.out.println("_____________________________________");
                     if (inputRole.equalsIgnoreCase("Exit")) {
                         return;
                     }
-                   
+
                     if (inputRole.isEmpty()) {
                         System.out.println("Role cannot be empty, Please enter your password:");
                         attempt++;
@@ -272,5 +296,25 @@ public class PlayerRegistration {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean isEmailAlreadyPresent(String email) {
+        try (Connection con = Databaseconnection.getConnection()) {
+            String query = "SELECT COUNT(*) FROM users WHERE email = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+
+                return count > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
     }
 }

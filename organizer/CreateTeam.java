@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 import util.Databaseconnection;
 import util.SafeInput;
+import util.SessionManager;
 
 public class CreateTeam {
     Scanner sc = new Scanner(System.in);
@@ -46,8 +47,19 @@ public class CreateTeam {
             System.out.println(" Error while creating team: " + e.getMessage());
         }
     }
+    void createTeam()
+    {
+      System.out.println("Enter Your Organizer Id");
+       int organizer_id = SessionManager.getOrganizerId();
+        if (!isValidOrganizerId(organizer_id)) {
+            System.out.println("Invalid Organizer ID. Please enter your Organizer ID.");
+        } else{
+            getTeamName();
+        }
+    }
 
     public void getTeamName() {
+        
         while (true) {
             int attempt = 0;
             while (attempt < 3) {
@@ -322,6 +334,20 @@ public class CreateTeam {
             }
         } catch (Exception e) {
             System.out.println("Exiting...");
+        }
+    }
+     private boolean isValidOrganizerId(int organizer_id) {
+
+        try (Connection con = Databaseconnection.getConnection()) {
+            String query = "SELECT organizer_id FROM organizers WHERE organizer_id = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setInt(1, organizer_id);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

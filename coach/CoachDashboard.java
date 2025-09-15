@@ -46,7 +46,7 @@ public class CoachDashboard {
 
                     }
                     case 3: {
-                        NavigationHelper.goBack();
+                         
                         return;
                     }
                     default: {

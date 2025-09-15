@@ -40,7 +40,7 @@ public class OrganizerDashboard {
                         break;
                     }
                     case 3: {
-                        NavigationHelper.goBack();
+                        
                         return;
                     }
                     default: {
@@ -105,7 +105,7 @@ public class OrganizerDashboard {
 
                     case 5:
                         CreateTeam ct = new CreateTeam();
-                        ct.getTeamName();
+                        ct.createTeam();
                         break;
 
                     case 6:

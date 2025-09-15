@@ -34,7 +34,7 @@ public class AdminDashboard {
                         break;
                     }
                     case 2: {
-                        NavigationHelper.goBack();
+                      
                         return;
                     }
                     default: {
